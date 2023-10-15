@@ -16,30 +16,6 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<ICargoService, CargoService>();
-builder.Services.AddScoped<ICargoReadRepository, CargoReadRepository>();
-builder.Services.AddScoped<IPortContext, PortContext>();
-
-builder.Services.AddScoped<ICompanyPerService, CompanyPerService>();
-builder.Services.AddScoped<ICompanyPerReadRepository, CompanyPerReadRepository>();
-builder.Services.AddScoped<IPortContext, PortContext>();
-
-builder.Services.AddScoped<ICompanyZakazchikService, CompanyZakazchikService>();
-builder.Services.AddScoped<ICompanyZakazchikReadRepository, CompanyZakazchikReadRepository>();
-builder.Services.AddScoped<IPortContext, PortContext>();
-
-builder.Services.AddScoped<IDocumentiService, DocumentiService>();
-builder.Services.AddScoped<IDocumentiReadRepository, DocumentiReadRepository>();
-builder.Services.AddScoped<IPortContext, PortContext>();
-
-builder.Services.AddScoped<IStaffService, StaffService>();
-builder.Services.AddScoped<IStaffReadRepository, StaffReadRepository>();
-builder.Services.AddScoped<IPortContext, PortContext>();
-
-builder.Services.AddScoped<IVesselService, VesselService>();
-builder.Services.AddScoped<IVesselReadRepository, VesselReadRepository>();
-builder.Services.AddScoped<IPortContext, PortContext>();
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
