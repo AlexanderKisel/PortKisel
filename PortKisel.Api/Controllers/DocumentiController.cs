@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.OpenApi.Extensions;
 using PortKisel.Models;
 using PortKisel.Services.Contracts.Interface;
 
@@ -31,7 +32,7 @@ namespace PortKisel.Controllers
                 VesselId = x.VesselId,
                 CompanyPerId = x.CompanyPerId,
                 CompanyZakazchikId = x.CompanyZakazchikId,
-                Posts = x.Posts,
+                Posts = x.Posts.GetDisplayName(),
             }));
         }
 
@@ -53,7 +54,7 @@ namespace PortKisel.Controllers
                 VesselId = result.VesselId,
                 CompanyPerId = result.CompanyPerId,
                 CompanyZakazchikId = result.CompanyZakazchikId,
-                Posts = result.Posts,
+                Posts = result.Posts.GetDisplayName(),
             });
         }
     }

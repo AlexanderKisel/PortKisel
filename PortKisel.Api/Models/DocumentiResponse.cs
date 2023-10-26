@@ -46,6 +46,6 @@ namespace PortKisel.Models
         /// <summary>
         /// Пост
         /// </summary>
-        public Posts Posts { get; set; }
+        public string Posts { get; set; }
     }
 }

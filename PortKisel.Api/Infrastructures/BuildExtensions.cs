@@ -8,7 +8,7 @@ using PortKisel.Services.AutoMappers;
 
 namespace PortKisel.Api.Infrastructures
 {
-    public class BuildExtensions
+    public static class BuildExtensions
     {
         public static void AddDependencies(this IServiceCollection services)
         {
@@ -38,7 +38,7 @@ namespace PortKisel.Api.Infrastructures
 
             services.AddScoped<IPortContext, PortContext>();
 
-            services.AddAutoMapper(typeof(ServiceProfile));
+            //services.AddAutoMapper(typeof(ServiceProfile));
         }
     }
 }

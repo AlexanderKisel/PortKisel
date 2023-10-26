@@ -1,6 +1,7 @@
 ﻿using PortKisel.Repositories.Contracts.Interface;
 using PortKisel.Services.Contracts.Interface;
 using PortKisel.Services.Contracts.Models;
+using PortKisel.Services.Contracts.Models.Enums;
 
 namespace PortKisel.Services.Implementations
 {
@@ -24,7 +25,7 @@ namespace PortKisel.Services.Implementations
                 VesselId = x.VesselId,
                 CompanyPerId = x.CompanyPerId,
                 CompanyZakazchikId = x.CompanyZakazchikId,
-                Posts = x.Posts,
+                Posts = (PostModels)x.Posts,
             });
         }
 
@@ -45,7 +46,7 @@ namespace PortKisel.Services.Implementations
                 VesselId = item.VesselId,
                 CompanyPerId = item.CompanyPerId,
                 CompanyZakazchikId = item.CompanyZakazchikId,
-                Posts = item.Posts,
+                Posts = (PostModels)item.Posts,
             };
         }
     }

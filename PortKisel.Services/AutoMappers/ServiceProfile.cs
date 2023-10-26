@@ -8,7 +8,7 @@ namespace PortKisel.Services.AutoMappers
     {
         public ServiceProfile() 
         {
-            CreateMap<>
+            //CreateMap<>;
         }
     }
 }

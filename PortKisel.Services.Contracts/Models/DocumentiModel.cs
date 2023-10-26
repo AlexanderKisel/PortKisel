@@ -1,4 +1,4 @@
-﻿using PortKisel.Context.Contracts.Enums;
+﻿using PortKisel.Services.Contracts.Models.Enums;
 
 namespace PortKisel.Services.Contracts.Models
 {
@@ -46,6 +46,6 @@ namespace PortKisel.Services.Contracts.Models
         /// <summary>
         /// Пост
         /// </summary>
-        public Posts Posts { get; set; }
+        public PostModels Posts { get; set; }
     }
 }
