@@ -1,29 +1,26 @@
-﻿using PortKisel.Repositories.Contracts.Interface;
+﻿using AutoMapper;
+using PortKisel.Services.Anchors;
+using PortKisel.Repositories.Contracts.Interface;
 using PortKisel.Services.Contracts.Interface;
 using PortKisel.Services.Contracts.Models;
 
 namespace PortKisel.Services.Implementations
 {
-    public class CargoService : ICargoService
+    public class CargoService : ICargoService, IServiceAnchor
     {
         private readonly ICargoReadRepository cargoReadRepository;
+        private readonly IMapper mapper;
 
-        public CargoService(ICargoReadRepository cargoReadRepository)
+        public CargoService(ICargoReadRepository cargoReadRepository, IMapper mapper)
         {
             this.cargoReadRepository = cargoReadRepository;
+            this.mapper = mapper;
         }
 
         async Task<IEnumerable<CargoModel>> ICargoService.GetAllAsync(CancellationToken cancellationToken)
         {
             var result = await cargoReadRepository.GetAllAsync(cancellationToken);
-            return result.Select(x => new CargoModel
-            {
-                Id = x.Id,
-                Name = x.Name,
-                Description = x.Description,
-                Weight = x.Weight,
-                CompanyZakazchikId = x.CompanyZakazchikId,
-            });
+            return mapper.Map<IEnumerable<CargoModel>>(result);
         }
 
         async Task<CargoModel?> ICargoService.GetByAsync(Guid id, CancellationToken cancellationToken)
@@ -34,14 +31,7 @@ namespace PortKisel.Services.Implementations
                 return null;
             }
 
-            return new CargoModel
-            {
-                Id = item.Id,
-                Name = item.Name,
-                Description = item.Description,
-                Weight = item.Weight,
-                CompanyZakazchikId = item.CompanyZakazchikId,
-            };
+            return mapper.Map<CargoModel>(item);
         }
     }
 }

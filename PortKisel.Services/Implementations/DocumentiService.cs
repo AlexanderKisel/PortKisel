@@ -21,10 +21,10 @@ namespace PortKisel.Services.Implementations
                 Id = x.Id,
                 NumberDoc = x.NumberDoc,
                 IssaedAt = x.IssaedAt,
-                CargoId = x.CargoId,
-                VesselId = x.VesselId,
-                CompanyPerId = x.CompanyPerId,
-                CompanyZakazchikId = x.CompanyZakazchikId,
+                CargoName = x.CargoId,
+                VesselName = x.VesselId,
+                CompanyPerName = x.CompanyPerId,
+                CompanyZakazchikName = x.CompanyZakazchikId,
                 Posts = (PostModels)x.Posts,
             });
         }

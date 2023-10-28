@@ -28,6 +28,6 @@
         /// <summary>
         /// Компания заказчик (владедец груза)
         /// </summary>
-        public Guid CompanyZakazchikId { get; set; }
+        public CompanyZakazchikModel? CompanyZakazchikName { get; set; }
     }
 }

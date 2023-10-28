@@ -1,6 +1,9 @@
 ﻿using AutoMapper;
+using AutoMapper.Extensions.EnumMapping;
+using PortKisel.Context.Contracts.Enums;
 using PortKisel.Context.Contracts.Models;
 using PortKisel.Services.Contracts.Models;
+using PortKisel.Services.Contracts.Models.Enums;
 
 namespace PortKisel.Services.AutoMappers
 {
@@ -8,7 +11,29 @@ namespace PortKisel.Services.AutoMappers
     {
         public ServiceProfile() 
         {
-            //CreateMap<>;
+            CreateMap<Posts, PostModels>()
+                .ConvertUsingEnumMapping(opt => opt.MapByName())
+                .ReverseMap();
+
+            CreateMap<Cargo, CargoModel>(MemberList.Destination)
+                .ForMember(x => x.CompanyZakazchikName, next => next.Ignore());
+
+            CreateMap<CompanyPer, CompanyPerModel>(MemberList.Destination);
+
+            CreateMap<CompanyZakazchik, CompanyZakazchikModel>(MemberList.Destination);
+
+            CreateMap<Documenti, DocumentiModel>(MemberList.Destination)
+                .ForMember(x => x.CargoName, next => next.Ignore())
+                .ForMember(x => x.CompanyPerName, next => next.Ignore())
+                .ForMember(x => x.CompanyZakazchikName, next => next.Ignore())
+                .ForMember(x => x.VesselName, next => next.Ignore())
+                .ForMember(x => x.Weight, next => next.Ignore())
+                .ForMember(x => x.Responsible_cargo, next => next.Ignore());
+
+            CreateMap<Staff, StaffModel>(MemberList.Destination);
+
+            CreateMap<Vessel, VesselModel>(MemberList.Destination)
+                .ForMember(x => x.CompanyPerName, next => next.Ignore());
         }
     }
 }

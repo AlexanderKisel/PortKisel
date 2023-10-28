@@ -41,6 +41,6 @@ namespace PortKisel.Context.Contracts.Models
         /// <summary>
         /// Пост
         /// </summary>
-        public Posts Posts { get; set; }
+        public Guid? Responsible_cargo { get; set; }
     }
 }

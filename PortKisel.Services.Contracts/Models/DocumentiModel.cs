@@ -25,27 +25,31 @@ namespace PortKisel.Services.Contracts.Models
         /// <summary>
         /// <see cref="Cargo"/>
         /// </summary>
-        public Guid CargoId { get; set; }
+        public CargoModel? CargoName { get; set; }
 
+        /// <summary>
+        /// Вес груза
+        /// </summary>
+        public CargoModel? Weight { get; set; }
 
         /// <summary>
         /// <see cref="Vessel"/>
         /// </summary>
-        public Guid VesselId { get; set; }
+        public VesselModel? VesselName { get; set; }
 
         /// <summary>
         /// Компания перевозчик
         /// </summary>
-        public Guid CompanyPerId { get; set; }
+        public CompanyPerModel? CompanyPerName { get; set; }
 
         /// <summary>
         /// Компания заказчик
         /// </summary>
-        public Guid CompanyZakazchikId { get; set; }
+        public CompanyZakazchikModel? CompanyZakazchikName { get; set; }
 
         /// <summary>
         /// Пост
         /// </summary>
-        public PostModels Posts { get; set; }
+        public PostModels? Responsible_cargo { get; set; }
     }
 }
