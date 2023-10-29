@@ -1,27 +1,26 @@
-﻿using PortKisel.Repositories.Contracts.Interface;
+﻿using AutoMapper;
+using PortKisel.Services.Anchors;
+using PortKisel.Repositories.Contracts.Interface;
 using PortKisel.Services.Contracts.Interface;
 using PortKisel.Services.Contracts.Models;
 
 namespace PortKisel.Services.Implementations
 {
-    public class CompanyZakazchikService : ICompanyZakazchikService
+    public class CompanyZakazchikService : ICompanyZakazchikService, IServiceAnchor
     {
         private readonly ICompanyZakazchikReadRepository companyZakazchikReadRepository;
+        private readonly IMapper mapper;
         
-        public CompanyZakazchikService(ICompanyZakazchikReadRepository companyZakazchikReadRepository)
+        public CompanyZakazchikService(ICompanyZakazchikReadRepository companyZakazchikReadRepository, IMapper mapper)
         {
             this.companyZakazchikReadRepository = companyZakazchikReadRepository;
+            this.mapper = mapper;
         }
 
         async Task<IEnumerable<CompanyZakazchikModel>> ICompanyZakazchikService.GetAllAsync(CancellationToken cancellationToken)
         {
             var result = await companyZakazchikReadRepository.GetAllAsync(cancellationToken);
-            return result.Select(x => new CompanyZakazchikModel
-            {
-                Id = x.Id,
-                CompanyZakazchikName = x.CompanyZakazchikName,
-                CompanyZakazchikDescription = x.CompanyZakazchikDescription,
-            });
+            return mapper.Map<IEnumerable<CompanyZakazchikModel>>(result);
         }
 
         async Task<CompanyZakazchikModel?> ICompanyZakazchikService.GetByAsync(Guid id, CancellationToken cancellationToken)
@@ -32,12 +31,7 @@ namespace PortKisel.Services.Implementations
                 return null;
             }
 
-            return new CompanyZakazchikModel
-            {
-                Id = item.Id,
-                CompanyZakazchikName = item.CompanyZakazchikName,
-                CompanyZakazchikDescription = item.CompanyZakazchikDescription,
-            };
+            return mapper.Map<CompanyZakazchikModel>(item);
         }
     }
 }

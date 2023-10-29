@@ -1,13 +1,16 @@
-﻿using PortKisel.Repositories.Contracts.Interface;
+﻿using AutoMapper;
+using PortKisel.Services.Anchors;
+using PortKisel.Repositories.Contracts.Interface;
 using PortKisel.Services.Contracts.Interface;
 using PortKisel.Services.Contracts.Models;
 using PortKisel.Services.Contracts.Models.Enums;
 
 namespace PortKisel.Services.Implementations
 {
-    public class DocumentiService : IDocumentiService
+    public class DocumentiService : IDocumentiService, IServiceAnchor
     {
         private readonly IDocumentiReadRepository documentiReadRepository;
+        private readonly 
 
         public DocumentiService(IDocumentiReadRepository documentiReadRepository)
         {

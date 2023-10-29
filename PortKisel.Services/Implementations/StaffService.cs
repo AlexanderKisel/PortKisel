@@ -1,26 +1,25 @@
-﻿using PortKisel.Repositories.Contracts.Interface;
+﻿using AutoMapper;
+using PortKisel.Services.Anchors;
+using PortKisel.Repositories.Contracts.Interface;
 using PortKisel.Services.Contracts.Interface;
 using PortKisel.Services.Contracts.Models;
 
 namespace PortKisel.Services.Implementations
 {
-    public class StaffService : IStaffService
+    public class StaffService : IStaffService, IServiceAnchor
     {
         private readonly IStaffReadRepository staffReadRepository;
+        private readonly IMapper mapper;
 
-        public StaffService(IStaffReadRepository staffReadRepository)
+        public StaffService(IStaffReadRepository staffReadRepository, IMapper mapper)
         {
             this.staffReadRepository = staffReadRepository;
+            this.mapper = mapper;
         }
         async Task<IEnumerable<StaffModel>> IStaffService.GetAllAsync(CancellationToken cancellationToken)
         {
             var result = await staffReadRepository.GetAllAsync(cancellationToken);
-            return result.Select(x => new StaffModel
-            {
-                Id = x.Id,
-                FIO = x.FIO,
-                Posts = x.Post,
-            });
+            return mapper.Map<IEnumerable<StaffModel>>(result);
         }
 
         async Task<StaffModel?> IStaffService.GetByAsync(Guid id, CancellationToken cancellationToken)
@@ -31,12 +30,7 @@ namespace PortKisel.Services.Implementations
                 return null;
             }
 
-            return new StaffModel
-            {
-                Id = item.Id,
-                FIO = item.FIO,
-                Posts = item.Post,
-            };
+            return mapper.Map<StaffModel>(item);
         }
     }
 }

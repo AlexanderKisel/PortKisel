@@ -1,28 +1,40 @@
-﻿using PortKisel.Repositories.Contracts.Interface;
+﻿using AutoMapper;
+using PortKisel.Services.Anchors;
+using PortKisel.Repositories.Contracts.Interface;
 using PortKisel.Services.Contracts.Interface;
 using PortKisel.Services.Contracts.Models;
 
 namespace PortKisel.Services.Implementations
 {
-    public class VesselService : IVesselService
+    public class VesselService : IVesselService, IServiceAnchor
     {
         private readonly IVesselReadRepository vesselReadRepository;
+        private readonly ICompanyPerReadRepository companyPerReadRepository;
+        private readonly IMapper mapper;
 
-        public VesselService(IVesselReadRepository vesselReadRepository)
+        public VesselService(IVesselReadRepository vesselReadRepository,
+            ICompanyPerReadRepository companyPerReadRepository,
+            IMapper mapper)
         {
             this.vesselReadRepository = vesselReadRepository;
+            this.companyPerReadRepository = companyPerReadRepository;
+            this.mapper = mapper;
         }
         async Task<IEnumerable<VesselModel>> IVesselService.GetAllAsync(CancellationToken cancellationToken)
         {
-            var result = await vesselReadRepository.GetAllAsync(cancellationToken);
-            return result.Select(x => new VesselModel
+            var vessels = await vesselReadRepository.GetAllAsync(cancellationToken);
+            var companyPers = await companyPerReadRepository.GetByIdsAsync(vessels.Select(x => x.CompanyPerId).Distinct(), cancellationToken);
+            var result = new List<VesselModel>();
+            foreach (var vessel in vessels)
             {
-                Id = x.Id,
-                NameVessel = x.NameVessel,
-                Description = x.Description,
-                CompanyPerId = x.CompanyPerId,
-                LoadCapacity = x.LoadCapacity,
-            });
+                companyPers.TryGetValue(vessel.CompanyPerId, out var companyPer);
+                var ves = mapper.Map<VesselModel>(vessel);
+                ves.CompanyPerName = companyPer != null
+                    ? mapper.Map<CompanyPerModel>(companyPer)
+                    : null;
+                result.Add(ves);
+            }
+            return result;
         }
 
         async Task<VesselModel?> IVesselService.GetByAsync(Guid id, CancellationToken cancellationToken)
@@ -33,14 +45,13 @@ namespace PortKisel.Services.Implementations
                 return null;
             }
 
-            return new VesselModel
-            {
-                Id = item.Id,
-                NameVessel = item.NameVessel,
-                Description = item.Description,
-                CompanyPerId = item.CompanyPerId,
-                LoadCapacity = item.LoadCapacity,
-            };
+            var companyPer = await companyPerReadRepository.GetByIdAsync(item.CompanyPerId, cancellationToken);
+
+            var vessel = mapper.Map<VesselModel>(item);
+            vessel.CompanyPerName = companyPer != null
+                ? mapper.Map<CompanyPerModel>(companyPer)
+                : null;
+            return vessel;
         }
     }
 }
