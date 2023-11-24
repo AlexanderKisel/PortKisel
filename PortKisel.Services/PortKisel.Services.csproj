@@ -13,8 +13,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PortKisel.Common\PortKisel.Common.csproj" />
     <ProjectReference Include="..\PortKisel.Repositories.Contracts\PortKisel.Repositories.Contracts.csproj" />
     <ProjectReference Include="..\PortKisel.Services.Contracts\PortKisel.Services.Contracts.csproj" />
+    <ProjectReference Include="..\PortKisel.Shared\PortKisel.Shared.csproj" />
   </ItemGroup>
 
 </Project>
