@@ -26,7 +26,7 @@ namespace PortKisel.Context
         IEnumerable<CompanyPer> IPortContext.CompanyPers => companypers;
         IEnumerable<CompanyZakazchik> IPortContext.CompanyZakazchiks => companyzakazchiks;
         IEnumerable<Documenti> IPortContext.Documents => documents;
-        IEnumerable<Staff> IPortContext.Staff => staffs;
+        IEnumerable<Staff> IPortContext.Staffs => staffs;
         IEnumerable<Vessel> IPortContext.Vessels => vessels;
     }
 }

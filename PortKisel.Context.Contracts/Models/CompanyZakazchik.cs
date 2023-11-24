@@ -5,11 +5,11 @@
         /// <summary>
         /// Название компании заказчика
         /// </summary>
-        public string CompanyZakazchikName { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
 
         /// <summary>
         /// Описание
         /// </summary>
-        public string CompanyZakazchikDescription { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
     }
 }

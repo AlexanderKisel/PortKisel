@@ -1,4 +1,6 @@
-﻿namespace PortKisel.Context.Contracts.Models
+﻿using PortKisel.Context.Contracts.Enums;
+
+namespace PortKisel.Context.Contracts.Models
 {
     public class Staff: BaseAuditEntity
     {
@@ -10,6 +12,6 @@
         /// <summary>
         /// Должность
         /// </summary>
-        public string Post { get; set; } = string.Empty;
+        public Posts Post { get; set; } = Posts.None;
     }
 }

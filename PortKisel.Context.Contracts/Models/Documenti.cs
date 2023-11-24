@@ -10,7 +10,7 @@ namespace PortKisel.Context.Contracts.Models
         /// <summary>
         /// Номер документа
         /// </summary>
-        public string NumberDoc { get; set; } = string.Empty;
+        public string Number { get; set; } = string.Empty;
 
         /// <summary>
         /// Дата выдачи
@@ -19,28 +19,24 @@ namespace PortKisel.Context.Contracts.Models
 
         /// <summary>
         /// <see cref="Cargo"/>
+        /// В документе описывается определенный груз
         /// </summary>
         public Guid CargoId { get; set; }
 
-
         /// <summary>
         /// <see cref="Vessel"/>
+        /// В документе описывается судно
         /// </summary>
         public Guid VesselId { get; set; }
 
         /// <summary>
-        /// Компания перевозчик
+        /// Ответственный за груз
         /// </summary>
-        public Guid CompanyPerId { get; set; }
+        public Guid? Responsible_cargoId { get; set; }
 
         /// <summary>
-        /// Компания заказчик
+        /// Ответственный за груз
         /// </summary>
-        public Guid CompanyZakazchikId { get; set; }
-
-        /// <summary>
-        /// Пост
-        /// </summary>
-        public Guid? Responsible_cargo { get; set; }
+        public Posts? Responsible_cargo { get; set; }
     }
 }

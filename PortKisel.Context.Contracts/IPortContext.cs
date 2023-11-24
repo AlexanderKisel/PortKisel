@@ -15,7 +15,7 @@ namespace PortKisel.Context.Contracts
 
         IEnumerable<CompanyZakazchik> CompanyZakazchiks { get; }
         IEnumerable<Documenti> Documents { get; }
-        IEnumerable<Staff> Staff { get; }
+        IEnumerable<Staff> Staffs { get; }
         IEnumerable<Vessel> Vessels { get; }
     }
 }
