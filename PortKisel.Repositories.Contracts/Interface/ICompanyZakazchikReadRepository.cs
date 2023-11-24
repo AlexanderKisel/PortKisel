@@ -10,16 +10,17 @@ namespace PortKisel.Repositories.Contracts.Interface
         /// <summary>
         /// Получить список всех сотрудников <see cref="CompanyZakazchik"/>
         /// </summary>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
         Task<List<CompanyZakazchik>> GetAllAsync(CancellationToken cancellationToken);
 
         /// <summary>
         /// Получить <see cref="CompanyZakazchik"/> по id
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
         Task<CompanyZakazchik?> GetByIdAsync(Guid id, CancellationToken cancellationToken);
+
+
+        /// <summary>
+        /// Получить список всех компаний по идентификаторам
+        /// </summary>
+        Task<Dictionary<Guid, CompanyZakazchik>> GetByIdsAsync(IEnumerable<Guid> ids, CancellationToken cancellationToken);
     }
 }

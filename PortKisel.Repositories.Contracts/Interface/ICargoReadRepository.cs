@@ -10,16 +10,16 @@ namespace PortKisel.Repositories.Contracts.Interface
         /// <summary>
         /// Получить список всех <see cref="Cargo"/>
         /// </summary>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
         Task<List<Cargo>> GetAllAsync(CancellationToken cancellationToken);
 
         /// <summary>
         /// Получить <see cref="Cargo"/> по id
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
         Task<Cargo?> GetByIdAsync(Guid id, CancellationToken cancellationToken);
+
+        /// <summary>
+        /// Получить <see cref="Cargo"/>
+        /// </summary>
+        Task<Dictionary<Guid, Cargo>> GetByIdsAsync(IEnumerable<Guid> ids,CancellationToken cancellationToken);
     }
 }
