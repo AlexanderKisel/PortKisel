@@ -19,18 +19,24 @@ namespace PortKisel.Services.Implementations
         async Task<IEnumerable<StaffModel>> IStaffService.GetAllAsync(CancellationToken cancellationToken)
         {
             var result = await staffReadRepository.GetAllAsync(cancellationToken);
-            return mapper.Map<IEnumerable<StaffModel>>(result);
+            var listStaff = new List<StaffModel>();
+            foreach(var staff in result)
+            {
+                var st = mapper.Map<StaffModel>(staff);
+                listStaff.Add(st);
+            }
+            return listStaff;
         }
 
-        async Task<StaffModel?> IStaffService.GetByAsync(Guid id, CancellationToken cancellationToken)
+        async Task<StaffModel?> IStaffService.GetByIdAsync(Guid id, CancellationToken cancellationToken)
         {
             var item = await staffReadRepository.GetByIdAsync(id, cancellationToken);
             if (item == null)
             {
                 return null;
             }
-
-            return mapper.Map<StaffModel>(item);
+            var st = mapper.Map<StaffModel>(item);
+            return st;
         }
     }
 }

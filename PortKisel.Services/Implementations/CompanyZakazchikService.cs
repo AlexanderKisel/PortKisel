@@ -20,18 +20,25 @@ namespace PortKisel.Services.Implementations
         async Task<IEnumerable<CompanyZakazchikModel>> ICompanyZakazchikService.GetAllAsync(CancellationToken cancellationToken)
         {
             var result = await companyZakazchikReadRepository.GetAllAsync(cancellationToken);
-            return mapper.Map<IEnumerable<CompanyZakazchikModel>>(result);
+            var listCompanyZakazchik = new List<CompanyZakazchikModel>();
+            foreach(var companyZakazchik in result)
+            {
+                var companyZ = mapper.Map<CompanyZakazchikModel>(companyZakazchik);
+                listCompanyZakazchik.Add(companyZ);
+            }
+            return listCompanyZakazchik;
         }
 
-        async Task<CompanyZakazchikModel?> ICompanyZakazchikService.GetByAsync(Guid id, CancellationToken cancellationToken)
+        async Task<CompanyZakazchikModel?> ICompanyZakazchikService.GetByIdAsync(Guid id, CancellationToken cancellationToken)
         {
             var item = await companyZakazchikReadRepository.GetByIdAsync(id, cancellationToken);
             if(item == null)
             {
                 return null;
             }
+            var companyZ = mapper.Map<CompanyZakazchikModel>(item);
 
-            return mapper.Map<CompanyZakazchikModel>(item);
+            return companyZ;
         }
     }
 }

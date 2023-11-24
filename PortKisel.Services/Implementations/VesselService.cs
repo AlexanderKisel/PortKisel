@@ -22,19 +22,20 @@ namespace PortKisel.Services.Implementations
         }
         async Task<IEnumerable<VesselModel>> IVesselService.GetAllAsync(CancellationToken cancellationToken)
         {
-            var vessels = await vesselReadRepository.GetAllAsync(cancellationToken);
-            var companyPers = await companyPerReadRepository.GetByIdsAsync(vessels.Select(x => x.CompanyPerId).Distinct(), cancellationToken);
-            var result = new List<VesselModel>();
-            foreach (var vessel in vessels)
+            var result = await vesselReadRepository.GetAllAsync(cancellationToken);
+            var companyPers = await companyPerReadRepository.GetByIdsAsync(result.Select(x => x.CompanyPerId).Distinct(), cancellationToken);
+            var listVessel = new List<VesselModel>();
+            foreach (var vessel in result)
             {
-                companyPers.TryGetValue(vessel.CompanyPerId, out var companyPer);
+                if(!companyPers.TryGetValue(vessel.CompanyPerId, out var companyPer))
+                {
+                    continue;
+                }
                 var ves = mapper.Map<VesselModel>(vessel);
-                ves.CompanyPerName = companyPer != null
-                    ? mapper.Map<CompanyPerModel>(companyPer)
-                    : null;
-                result.Add(ves);
+                ves.CompanyPer = mapper.Map<CompanyPerModel>(companyPer);
+                listVessel.Add(ves);
             }
-            return result;
+            return listVessel;
         }
 
         async Task<VesselModel?> IVesselService.GetByAsync(Guid id, CancellationToken cancellationToken)
@@ -46,11 +47,9 @@ namespace PortKisel.Services.Implementations
             }
 
             var companyPer = await companyPerReadRepository.GetByIdAsync(item.CompanyPerId, cancellationToken);
-
             var vessel = mapper.Map<VesselModel>(item);
-            vessel.CompanyPerName = companyPer != null
-                ? mapper.Map<CompanyPerModel>(companyPer)
-                : null;
+            vessel.CompanyPer = mapper.Map<CompanyPerModel>(companyPer);
+
             return vessel;
         }
     }
