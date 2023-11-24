@@ -7,8 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PortKisel.Common\PortKisel.Common.csproj" />
     <ProjectReference Include="..\PortKisel.Context.Contracts\PortKisel.Context.Contracts.csproj" />
     <ProjectReference Include="..\PortKisel.Repositories.Contracts\PortKisel.Repositories.Contracts.csproj" />
+    <ProjectReference Include="..\PortKisel.Shared\PortKisel.Shared.csproj" />
   </ItemGroup>
 
 </Project>
