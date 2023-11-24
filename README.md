@@ -11,9 +11,9 @@
     Staff .. Post
     BaseAuditEntity --|> Number
     BaseAuditEntity --|> IssaedAt
-    BaseAuditEntity --|> CargoId
-    BaseAuditEntity --|> VesselId
-    BaseAuditEntity --|> Responsible_cargoId
+    BaseAuditEntity --|> Cargo
+    BaseAuditEntity --|> Vessel
+    BaseAuditEntity --|> Responsible_cargo
     BaseAuditEntity --|> Post
     IEntity ..|> BaseAuditEntity
     IEntityAuditCreated ..|> BaseAuditEntity
@@ -67,7 +67,8 @@
         +Post Post
     }
     class Documenti {
-        +string Number 
+        +string Number
+        +DateTimeOffset IssaedAt
         +Guid CargoId 
         +Guid VesselId
         +Guid Responsible_cargoId
