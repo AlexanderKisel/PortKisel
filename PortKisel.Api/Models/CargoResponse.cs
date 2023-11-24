@@ -1,4 +1,6 @@
-﻿namespace PortKisel.Models
+﻿using PortKisel.Services.Contracts.Models;
+
+namespace PortKisel.Api.Models
 {
     /// <summary>
     /// Модель ответа сущности груза
@@ -13,21 +15,21 @@
         /// <summary>
         /// Название груза
         /// </summary>
-        public string Name { get; set; } = string.Empty;
+        public string Name { get; set; }
 
         /// <summary>
         /// Описание груза
         /// </summary>
-        public string Description { get; set; } = string.Empty;
+        public string Description { get; set; }
 
         /// <summary>
         /// Вес груза
         /// </summary>
-        public string Weight { get; set; } = string.Empty;
+        public string Weight { get; set; }
 
         /// <summary>
         /// Компания заказчик (владедец груза)
         /// </summary>
-        public Guid CompanyZakazchikId { get; set; }
+        public string CompanyZakazchikName { get; set; }
     }
 }
