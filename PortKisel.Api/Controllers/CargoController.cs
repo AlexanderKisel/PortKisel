@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PortKisel.Models;
+using PortKisel.Api.Models;
 using PortKisel.Services.Contracts.Interface;
+using AutoMapper;
 
 namespace PortKisel.Controllers
 {
@@ -9,46 +10,38 @@ namespace PortKisel.Controllers
     /// </summary>
     [ApiController]
     [Route("[controller]")]
+    [ApiExplorerSettings(GroupName = "Cargo")]
     public class CargoController : ControllerBase
     {
         private readonly ICargoService cargoService;
+        private readonly IMapper mapper;
 
-        public CargoController(ICargoService cargoService)
+        public CargoController(ICargoService cargoService, IMapper mapper)
         {
             this.cargoService = cargoService;
+            this.mapper = mapper;
         }
 
         [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<CargoResponse>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
         {
             var result = await cargoService.GetAllAsync(cancellationToken);
-            return Ok(result.Select(x => new CargoResponse
-            {
-                Id = x.Id,
-                Name = x.Name,
-                Description = x.Description,
-                Weight = x.Weight,
-                CompanyZakazchikId = x.CompanyZakazchikId,
-            }));
+            return Ok(mapper.Map<IEnumerable<CargoResponse>>(result));
         }
 
         [HttpGet("{id:guid}")]
+        [ProducesResponseType(typeof(CargoResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetById(Guid id, CancellationToken cancellationToken)
         {
-            var result = await cargoService.GetByAsync(id, cancellationToken);
+            var result = await cargoService.GetByIdAsync(id, cancellationToken);
             if (result == null)
             {
-                return NotFound($"Не удалось найти сотрудника с идентификатором {id}");
+                return NotFound($"Не удалось найти груз с идентификатором {id}");
             }
 
-            return Ok(new CargoResponse
-            {
-                Id = result.Id,
-                Name = result.Name,
-                Description = result.Description,
-                Weight = result.Weight,
-                CompanyZakazchikId = result.CompanyZakazchikId,
-            });
+            return Ok(mapper.Map<CargoResponse>(result));
         }
     }
 }

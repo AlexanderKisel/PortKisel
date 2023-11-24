@@ -1,5 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using PortKisel.Models;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using PortKisel.Api.Models;
 using PortKisel.Services.Contracts.Interface;
 
 namespace PortKisel.Controllers
@@ -9,30 +10,29 @@ namespace PortKisel.Controllers
     /// </summary>
     [ApiController]
     [Route("[controller]")]
+    [ApiExplorerSettings(GroupName = "Vessel")]
     public class VesselController : ControllerBase
     {
         private readonly IVesselService vesselService;
+        private readonly IMapper mapper;
 
-        public VesselController(IVesselService vesselService)
+        public VesselController(IVesselService vesselService, IMapper mapper)
         {
             this.vesselService = vesselService;
+            this.mapper = mapper;
         }
 
         [HttpGet]
+        [ProducesResponseType(typeof(VesselResponse), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
         {
             var result = await vesselService.GetAllAsync(cancellationToken);
-            return Ok(result.Select(x => new VesselResponse
-            {
-                Id = x.Id,
-                NameVessel = x.NameVessel,
-                Description = x.Description,
-                CompanyPerId = x.CompanyPerId,
-                LoadCapacity = x.LoadCapacity,
-            }));
+            return Ok(mapper.Map<IEnumerable<VesselResponse>>(result));
         }
 
         [HttpGet("{id:guid}")]
+        [ProducesResponseType(typeof(VesselResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetById(Guid id, CancellationToken cancellationToken)
         {
             var result = await vesselService.GetByAsync(id, cancellationToken);
@@ -41,14 +41,7 @@ namespace PortKisel.Controllers
                 return NotFound($"Не удалось найти сотрудника с идентификатором {id}");
             }
 
-            return Ok(new VesselResponse
-            {
-                Id = result.Id,
-                NameVessel = result.NameVessel,
-                Description = result.Description,
-                CompanyPerId = result.CompanyPerId,
-                LoadCapacity = result.LoadCapacity,
-            });
+            return Ok(mapper.Map<VesselResponse>(result));
         }
     }
 }

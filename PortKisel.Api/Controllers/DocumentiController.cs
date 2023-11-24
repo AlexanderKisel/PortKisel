@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.OpenApi.Extensions;
-using PortKisel.Models;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using PortKisel.Api.Models;
 using PortKisel.Services.Contracts.Interface;
+using System.ComponentModel.DataAnnotations;
 
 namespace PortKisel.Controllers
 {
@@ -10,34 +11,30 @@ namespace PortKisel.Controllers
     /// </summary>
     [ApiController]
     [Route("[controller]")]
+    [ApiExplorerSettings(GroupName = "Documenti")]
     public class DocumentiController : ControllerBase
     {
         private readonly IDocumentiService documentiService;
+        private readonly IMapper mapper;
 
-        public DocumentiController(IDocumentiService documentiService)
+        public DocumentiController(IDocumentiService documentiService, IMapper mapper)
         {
             this.documentiService = documentiService;
+            this.mapper = mapper;
         }
 
         [HttpGet]
+        [ProducesResponseType(typeof(DocumentiResponse), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
         {
             var result = await documentiService.GetAllAsync(cancellationToken);
-            return Ok(result.Select(x => new DocumentiResponse
-            {
-                Id = x.Id,
-                NumberDoc = x.NumberDoc,
-                IssaedAt = x.IssaedAt,
-                CargoId = x.CargoId,
-                VesselId = x.VesselId,
-                CompanyPerId = x.CompanyPerId,
-                CompanyZakazchikId = x.CompanyZakazchikId,
-                Posts = x.Posts.GetDisplayName(),
-            }));
+            return Ok(mapper.Map<IEnumerable<DocumentiResponse>>(result));
         }
 
         [HttpGet("{id:guid}")]
-        public async Task<IActionResult> GetById(Guid id, CancellationToken cancellationToken)
+        [ProducesResponseType(typeof(DocumentiResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetById([Required] Guid id, CancellationToken cancellationToken)
         {
             var result = await documentiService.GetByAsync(id, cancellationToken);
             if (result == null)
@@ -45,17 +42,7 @@ namespace PortKisel.Controllers
                 return NotFound($"Не удалось найти сотрудника с идентификатором {id}");
             }
 
-            return Ok(new DocumentiResponse
-            {
-                Id = result.Id,
-                NumberDoc = result.NumberDoc,
-                IssaedAt = result.IssaedAt,
-                CargoId = result.CargoId,
-                VesselId = result.VesselId,
-                CompanyPerId = result.CompanyPerId,
-                CompanyZakazchikId = result.CompanyZakazchikId,
-                Posts = result.Posts.GetDisplayName(),
-            });
+            return Ok(mapper.Map<DocumentiResponse>(result));
         }
     }
 }
