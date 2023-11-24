@@ -1,4 +1,4 @@
-﻿namespace PortKisel.Models
+﻿namespace PortKisel.Api.Models
 {
     /// <summary>
     /// Модель ответа сущности сотрудники

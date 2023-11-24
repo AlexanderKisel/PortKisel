@@ -1,4 +1,4 @@
-﻿namespace PortKisel.Models.Enums
+﻿namespace PortKisel.Api.Models.Enums
 {
     /// <summary>
     /// Типы должностей

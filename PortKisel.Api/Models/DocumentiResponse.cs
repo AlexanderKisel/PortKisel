@@ -1,6 +1,6 @@
-﻿using PortKisel.Context.Contracts.Enums;
+﻿using PortKisel.Services.Contracts.Models;
 
-namespace PortKisel.Models
+namespace PortKisel.Api.Models
 {
     /// <summary>
     /// Модель ответа сущности документов
@@ -23,15 +23,24 @@ namespace PortKisel.Models
         public DateTime IssaedAt { get; set; }
 
         /// <summary>
-        /// <see cref="Cargo"/>
+        /// <see cref="CargoModel"/>
         /// </summary>
-        public Guid CargoId { get; set; }
-
+        public string CargoName { get; set; }
 
         /// <summary>
-        /// <see cref="Vessel"/>
+        /// <see cref="CargoModel"/>
         /// </summary>
-        public Guid VesselId { get; set; }
+        public string CargoWeight { get; set; }
+
+        /// <summary>
+        /// <see cref="VesselModel"/>
+        /// </summary>
+        public string VesselName { get; set; }
+
+        /// <summary>
+        /// <see cref="VesselModel"/>
+        /// </summary>
+        public string VesselLoadCapacity { get; set; }
 
         /// <summary>
         /// Компания перевозчик
@@ -46,6 +55,6 @@ namespace PortKisel.Models
         /// <summary>
         /// Пост
         /// </summary>
-        public string Posts { get; set; }
+        public string Responsible_cargoName { get; set; }
     }
 }

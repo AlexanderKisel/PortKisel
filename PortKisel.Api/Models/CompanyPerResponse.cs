@@ -1,4 +1,4 @@
-﻿namespace PortKisel.Models
+﻿namespace PortKisel.Api.Models
 {
     /// <summary>
     /// Модель ответа сущности компания перевозчик
@@ -12,10 +12,10 @@
         /// <summary>
         /// Наименование компании перевозчика
         /// </summary>
-        public string CompanyPerName { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
         /// <summary>
         /// Описание компании перевозчика
         /// </summary>
-        public string CompanyPerDescription { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace PortKisel.Models
+﻿namespace PortKisel.Api.Models
 {
     /// <summary>
     /// Модель ответа сущности судна
@@ -12,7 +12,7 @@
         /// <summary>
         /// Название судна
         /// </summary>
-        public string NameVessel { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
 
         /// <summary>
         /// Описание
