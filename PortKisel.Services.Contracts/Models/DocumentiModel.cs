@@ -15,7 +15,7 @@ namespace PortKisel.Services.Contracts.Models
         /// <summary>
         /// Номер документа
         /// </summary>
-        public string NumberDoc { get; set; } = string.Empty;
+        public string Number { get; set; } = string.Empty;
 
         /// <summary>
         /// Дата выдачи
@@ -24,32 +24,20 @@ namespace PortKisel.Services.Contracts.Models
 
         /// <summary>
         /// <see cref="Cargo"/>
+        /// В документе описывается определенный груз
         /// </summary>
-        public CargoModel? CargoName { get; set; }
+        public CargoModel Cargo { get; set; }
 
-        /// <summary>
-        /// Вес груза
-        /// </summary>
-        public CargoModel? Weight { get; set; }
 
         /// <summary>
         /// <see cref="Vessel"/>
+        /// В документе описывается судно
         /// </summary>
-        public VesselModel? VesselName { get; set; }
+        public VesselModel Vessel { get; set; }
 
         /// <summary>
-        /// Компания перевозчик
+        /// Ответственный за груз
         /// </summary>
-        public CompanyPerModel? CompanyPerName { get; set; }
-
-        /// <summary>
-        /// Компания заказчик
-        /// </summary>
-        public CompanyZakazchikModel? CompanyZakazchikName { get; set; }
-
-        /// <summary>
-        /// Пост
-        /// </summary>
-        public PostModels? Responsible_cargo { get; set; }
+        public StaffModel? Responsible_cargo { get; set; }
     }
 }

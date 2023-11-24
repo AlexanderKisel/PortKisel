@@ -9,10 +9,11 @@
         /// Идентификатор
         /// </summary>
         public Guid Id { get; set; }
+
         /// <summary>
         /// Название судна
         /// </summary>
-        public string NameVessel { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
 
         /// <summary>
         /// Описание
@@ -22,7 +23,7 @@
         /// <summary>
         /// Компания перевозчик
         /// </summary>
-        public CompanyPerModel? CompanyPerName { get; set; }
+        public CompanyPerModel CompanyPer { get; set; }
 
         /// <summary>
         /// Грузоподъемность

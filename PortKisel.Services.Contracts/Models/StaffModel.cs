@@ -1,4 +1,6 @@
-﻿namespace PortKisel.Services.Contracts.Models
+﻿using PortKisel.Services.Contracts.Models.Enums;
+
+namespace PortKisel.Services.Contracts.Models
 {
     /// <summary>
     /// Модель сотрудников
@@ -9,7 +11,7 @@
         /// Идентификатор
         /// </summary>
         public Guid Id { get; set; }
-        
+
         /// <summary>
         /// ФИО
         /// </summary>
@@ -18,6 +20,6 @@
         /// <summary>
         /// Должность
         /// </summary>
-        public string Posts { get; set; } = string.Empty;
+        public PostModels Post { get; set; } = PostModels.None;
     }
 }

@@ -11,13 +11,13 @@
         public Guid Id { get; set; }
 
         /// <summary>
-        /// Название компании
+        /// Название компании перевозчика
         /// </summary>
-        public string CompanyPerName { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
 
         /// <summary>
         /// Описание компании
         /// </summary>
-        public string CompanyPerDescription { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
     }
 }

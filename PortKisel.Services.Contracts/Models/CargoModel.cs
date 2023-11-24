@@ -9,25 +9,25 @@
         /// Идентификатор
         /// </summary>
         public Guid Id { get; set; }
-        
+
         /// <summary>
         /// Название груза
         /// </summary>
         public string Name { get; set; } = string.Empty;
 
         /// <summary>
-        /// Описание груза
+        /// Описание грузы
         /// </summary>
         public string Description { get; set; } = string.Empty;
 
         /// <summary>
-        /// Вес груза
+        /// Масса груза
         /// </summary>
         public string Weight { get; set; } = string.Empty;
 
         /// <summary>
-        /// Компания заказчик (владедец груза)
+        /// <see cref="CompanyZakazchik"/>
         /// </summary>
-        public CompanyZakazchikModel? CompanyZakazchikName { get; set; }
+        public CompanyZakazchikModel CompanyZakazchik{ get; set; }
     }
 }
