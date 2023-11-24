@@ -3,18 +3,15 @@
 
 ```mermaid
     classDiagram
-    Documenti <.. Number
-    Documenti <.. IssaedAt
     Documenti <.. Cargo
     Documenti <.. Vessel
-    Documenti <.. Responsible_cargo
     Staff .. Post
-    BaseAuditEntity --|> Number
-    BaseAuditEntity --|> IssaedAt
     BaseAuditEntity --|> Cargo
     BaseAuditEntity --|> Vessel
-    BaseAuditEntity --|> Responsible_cargo
-    BaseAuditEntity --|> Post
+    BaseAuditEntity --|> Documenti
+    BaseAuditEntity --|> CompanyZakazchik
+    BaseAuditEntity --|> CompanyPer
+    BaseAuditEntity --|> Staff
     IEntity ..|> BaseAuditEntity
     IEntityAuditCreated ..|> BaseAuditEntity
     IEntityAuditDeleted ..|> BaseAuditEntity
@@ -45,7 +42,7 @@
         +string Name
         +string Description
         +string Weight
-        +string CompanyZakazchik
+        +Guid CompanyZakazchikId
     }
     class CompanyPer{
         +string Name
@@ -58,7 +55,7 @@
     class Vessel {
         +string Name
         +string Description
-        +string CompanyPer
+        +Guid CompanyPerId
         +string LoadCapacity
     }
 
@@ -68,11 +65,11 @@
     }
     class Documenti {
         +string Number
-        +DateTimeOffset IssaedAt
+        +date IssaedAt
         +Guid CargoId 
         +Guid VesselId
         +Guid Responsible_cargoId
-        +Post Responsible_cargo
+        +Post Post
         +DateTime Date
     }
     class Post {
