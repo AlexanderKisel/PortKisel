@@ -1,5 +1,4 @@
 using PortKisel.Api.Infrastructures;
-using PortKisel.Context;
 
 var builder = WebApplication.CreateBuilder(args);
 

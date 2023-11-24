@@ -1,6 +1,4 @@
-﻿using PortKisel.Services.Contracts.Models;
-
-namespace PortKisel.Api.Models
+﻿namespace PortKisel.Api.Models
 {
     /// <summary>
     /// Модель ответа сущности груза

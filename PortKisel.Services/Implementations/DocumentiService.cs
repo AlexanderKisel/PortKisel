@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
-using PortKisel.Services.Anchors;
 using PortKisel.Repositories.Contracts.Interface;
 using PortKisel.Services.Contracts.Interface;
 using PortKisel.Services.Contracts.Models;
-using PortKisel.Services.Contracts.Models.Enums;
 
 namespace PortKisel.Services.Implementations
 {
