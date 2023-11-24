@@ -17,6 +17,6 @@ namespace PortKisel.Services.Contracts.Interface
         /// <param name="id"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<CompanyZakazchikModel?> GetByAsync(Guid id, CancellationToken cancellationToken);
+        Task<CompanyZakazchikModel?> GetByIdAsync(Guid id, CancellationToken cancellationToken);
     }
 }
