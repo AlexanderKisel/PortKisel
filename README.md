@@ -5,6 +5,9 @@
     classDiagram
     Documenti <.. Cargo
     Documenti <.. Vessel
+    Documenti <.. Staff
+    Cargo <.. CompanyZakazchik
+    Vessel <..CompanyPer
     Staff .. Post
     BaseAuditEntity --|> Cargo
     BaseAuditEntity --|> Vessel
@@ -66,9 +69,12 @@
     class Documenti {
         +string Number
         +date IssaedAt
-        +Guid CargoId 
-        +Guid VesselId
-        +Guid Responsible_cargoId
+        +string CargoName 
+        +string CargoWeight
+        +string VesselName
+        +string VesselLoadCapacity
+        +Guid CompanyPerId
+        +Guid CompanyZakazchikId
         +Post Post
         +DateTime Date
     }
