@@ -23,11 +23,11 @@ namespace PortKisel.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(typeof(CompanyZakazchikResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<CompanyZakazchikResponse>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
         {
             var result = await companyZakazchikService.GetAllAsync(cancellationToken);
-            return Ok(mapper.Map<CompanyZakazchikResponse>(result));
+            return Ok(mapper.Map<IEnumerable<CompanyZakazchikResponse>>(result));
         }
 
         [HttpGet("{id:guid}")]
