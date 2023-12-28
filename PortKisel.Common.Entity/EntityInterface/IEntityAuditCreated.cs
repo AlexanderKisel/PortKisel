@@ -13,6 +13,6 @@
         /// <summary>
         /// Кто создал
         /// </summary>
-        public string CreateedBy { get; set; }
+        public string CreatedBy { get; set; }
     }
 }

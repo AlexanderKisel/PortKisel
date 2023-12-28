@@ -21,9 +21,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Context.Contracts.Configuration\PortKisel.Context.Configuration.csproj" />
+    <ProjectReference Include="..\PortKisel.Common.Entity\PortKisel.Common.Entity.csproj" />
     <ProjectReference Include="..\PortKisel.Common\PortKisel.Common.csproj" />
     <ProjectReference Include="..\PortKisel.Context.Contracts\PortKisel.Context.Contracts.csproj" />
-    <ProjectReference Include="..\PortKisel.Shared\PortKisel.Shared.csproj" />
   </ItemGroup>
 
 </Project>

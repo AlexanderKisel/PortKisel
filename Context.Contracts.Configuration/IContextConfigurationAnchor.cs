@@ -1,4 +1,4 @@
-﻿namespace PortKisel.Context.Contracts.Configuration
+﻿namespace PortKisel.Context.Configuration
 {
     /// <summary>
     /// Маркерный интерфейс для сканирования сборки и регистрации всех IEntityTypeConfiguration

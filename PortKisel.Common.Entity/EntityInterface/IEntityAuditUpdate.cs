@@ -3,16 +3,16 @@
     /// <summary>
     /// Аудит изменения сущности
     /// </summary>
-    public interface IEntityAuditUpdate
+    public interface IEntityAuditUpdated
     {
         /// <summary>
         /// Дата изменения
         /// </summary>
-        public DateTimeOffset UpdateAt { get; set; }
+        public DateTimeOffset UpdatedAt { get; set; }
 
         /// <summary>
         /// Кто изменил
         /// </summary>
-        public string UpdateBy { get; set; }
+        public string UpdatedBy { get; set; }
     }
 }

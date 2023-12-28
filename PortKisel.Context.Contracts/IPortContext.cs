@@ -1,16 +1,41 @@
 ﻿using PortKisel.Context.Contracts.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace PortKisel.Context.Contracts
 {
+    /// <summary>
+    /// Работа с сущностями
+    /// </summary>
     public interface IPortContext
     {
-        IEnumerable<Cargo> Cargos { get; }
+        /// <summary>
+        /// Список <inheritdoc cref="Cargo"/>
+        /// </summary>
+        DbSet<Cargo> Cargos { get; }
 
-        IEnumerable<CompanyPer> CompanyPers { get; }
+        /// <summary>
+        /// Список <inheritdoc cref="Vessel"/>
+        /// </summary>
+        DbSet<Vessel> Vessels { get; }
 
-        IEnumerable<CompanyZakazchik> CompanyZakazchiks { get; }
-        IEnumerable<Documenti> Documents { get; }
-        IEnumerable<Staff> Staffs { get; }
-        IEnumerable<Vessel> Vessels { get; }
+        /// <summary>
+        /// Список <inheritdoc cref="CompanyPer"/>
+        /// </summary>
+        DbSet<CompanyPer> CompanyPers { get; }
+
+        /// <summary>
+        /// Список <inheritdoc cref="CompanyZakazchik"/>
+        /// </summary>
+        DbSet<CompanyZakazchik> CompanyZakazchiks { get; }
+
+        /// <summary>
+        /// Список <inheritdoc cref="Documenti"/>
+        /// </summary>
+        DbSet<Documenti> Documentis { get; }
+
+        /// <summary>
+        /// Список <inheritdoc cref="Staff"/>
+        /// </summary>
+        DbSet<Staff> Staffs { get; }
     }
 }

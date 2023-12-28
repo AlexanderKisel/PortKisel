@@ -1,24 +1,30 @@
-﻿using PortKisel.Context.Contracts;
+﻿using PortKisel.Common.Entity.InterfaceDB;
 using PortKisel.Context.Contracts.Models;
 using PortKisel.Repositories.Contracts.Interface;
+using PortKisel.Common.Entity.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace PortKisel.Repositories.Implementations
 {
     public class DocumentiReadRepository : IDocumentiReadRepository, IRepositoryAnchor
     {
-        private readonly IPortContext context;
+        private readonly IDbRead reader;
 
-        public DocumentiReadRepository(IPortContext context)
+        public DocumentiReadRepository(IDbRead reader)
         {
-            this.context = context;
+            this.reader = reader;
         }
 
         Task<List<Documenti>> IDocumentiReadRepository.GetAllAsync(CancellationToken cancellationToken)
-            => Task.FromResult(context.Documents.Where(x => x.DeletedAt == null)
-                .OrderBy(x => x.Number)
-                .ToList());
+            => reader.Read<Documenti>()
+            .NotDeletedAt()
+            .OrderBy(x => x.Number)
+            .ThenBy(x => x.IssaedAt)
+            .ToListAsync(cancellationToken);
 
         Task<Documenti?> IDocumentiReadRepository.GetByIdAsync(Guid id, CancellationToken cancellationToken)
-            => Task.FromResult(context.Documents.FirstOrDefault(x => x.Id == id));
+            => reader.Read<Documenti>()
+            .ById(id)
+            .FirstOrDefaultAsync(cancellationToken);
     }
 }

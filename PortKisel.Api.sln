@@ -29,7 +29,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PortKisel.Common", "PortKis
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PortKisel.Common.Entity", "PortKisel.Common.Entity\PortKisel.Common.Entity.csproj", "{43B723B5-3390-4423-AD5A-6EDD64502B3E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortKisel.Context.Contracts.Configuration", "Context.Contracts.Configuration\PortKisel.Context.Contracts.Configuration.csproj", "{1F5BA15D-3B54-41DF-B72F-8448A15DCAE5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PortKisel.Context.Configuration", "Context.Contracts.Configuration\PortKisel.Context.Configuration.csproj", "{1F5BA15D-3B54-41DF-B72F-8448A15DCAE5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

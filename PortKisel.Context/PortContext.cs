@@ -1,32 +1,68 @@
-﻿using PortKisel.Context.Contracts;
+﻿using PortKisel.Common.Entity.InterfaceDB;
+using PortKisel.Context.Contracts;
 using PortKisel.Context.Contracts.Models;
+using PortKisel.Context.Configuration;
+using Microsoft.EntityFrameworkCore;
 
 namespace PortKisel.Context
 {
-    public class PortContext: IPortContext
+    /// <summary>
+    /// Контекст работы с БД
+    /// </summary>
+    /// <remarks>
+    /// 1) dotnet tool install --global dotnet-ef
+    /// 2) dotnet tool update --global dotnet-ef
+    /// 3) dotnet ef migrations add [name] --project PortKisel.Context\PortKisel.Context.csproj
+    /// 4) dotnet ef database update --project PortKisel.Context\PortKisel.Context.csproj
+    /// 5) dotnet ef database update [targetMigrationName] --PortKisel.Context\PortKisel.Context.csproj
+    /// </remarks>
+    public class PortContext : DbContext,
+        IPortContext,
+        IDbRead,
+        IDbWriter,
+        IUnitOfWork
     {
-        private readonly IList<Cargo> cargos;
-        private readonly IList<CompanyPer> companypers;
-        private readonly IList<CompanyZakazchik> companyzakazchiks;
-        private readonly IList<Documenti> documents;
-        private readonly IList<Staff> staffs;
-        private readonly IList<Vessel> vessels;
+        public DbSet<Vessel> Vessels { get; set; }
+        public DbSet<Cargo> Cargos { get; set; }
+        public DbSet<CompanyPer> CompanyPers { get; set; }
+        public DbSet<CompanyZakazchik> CompanyZakazchiks { get; set; }
+        public DbSet<Documenti> Documentis { get; set; }
+        public DbSet<Staff> Staffs { get; set; }
 
-        public PortContext()
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            cargos = new List<Cargo>();
-            companypers = new List<CompanyPer>();
-            companyzakazchiks = new List<CompanyZakazchik>();
-            documents = new List<Documenti>();
-            staffs = new List<Staff>();
-            vessels = new List<Vessel>();
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(IContextConfigurationAnchor).Assembly);
         }
 
-        IEnumerable<Cargo> IPortContext.Cargos => cargos;
-        IEnumerable<CompanyPer> IPortContext.CompanyPers => companypers;
-        IEnumerable<CompanyZakazchik> IPortContext.CompanyZakazchiks => companyzakazchiks;
-        IEnumerable<Documenti> IPortContext.Documents => documents;
-        IEnumerable<Staff> IPortContext.Staffs => staffs;
-        IEnumerable<Vessel> IPortContext.Vessels => vessels;
+        IQueryable<TEntity> IDbRead.Read<TEntity>()
+            => base.Set<TEntity>()
+                .AsNoTracking()
+                .AsQueryable();
+
+        void IDbWriter.Add<TEntities>(TEntities entity)
+            => base.Entry(entity).State = EntityState.Added;
+
+        void IDbWriter.Update<TEntities>(TEntities entity)
+              => base.Entry(entity).State = EntityState.Modified;
+
+        void IDbWriter.Delete<TEntities>(TEntities entity)
+              => base.Entry(entity).State = EntityState.Deleted;
+
+
+        async Task<int> IUnitOfWork.SaveChangesAsync(CancellationToken cancellationToken)
+        {
+            var count = await base.SaveChangesAsync(cancellationToken);
+            SkipTracker();
+            return count;
+        }
+
+        public void SkipTracker()
+        {
+            foreach (var entry in base.ChangeTracker.Entries().ToArray())
+            {
+                entry.State = EntityState.Detached;
+            }
+        }
     }
 }

@@ -11,5 +11,10 @@
         /// Описание
         /// </summary>
         public string Description { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Список грузов
+        /// </summary>
+        public IEnumerable<Cargo> Cargo { get; set; }
     }
 }

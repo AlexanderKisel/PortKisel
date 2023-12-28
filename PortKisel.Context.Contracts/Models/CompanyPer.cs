@@ -11,5 +11,10 @@
         /// Описание компании
         /// </summary>
         public string Description { get; set;} = string.Empty;
+
+        /// <summary>
+        /// Список судов
+        /// </summary>
+        public IEnumerable<Vessel> Vessels { get; set; }
     }
 }

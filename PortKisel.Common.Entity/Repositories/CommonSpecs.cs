@@ -2,7 +2,7 @@
 using PortKisel.Common.Entity.EntityInterface;
 using Microsoft.EntityFrameworkCore;
 
-namespace TimeTable203.Common.Entity.Repositories
+namespace PortKisel.Common.Entity.Repositories
 {
     /// <summary>
     /// Общие спецификации чтения
