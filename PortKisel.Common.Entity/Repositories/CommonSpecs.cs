@@ -1,6 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using Microsoft.EntityFrameworkCore;
 using PortKisel.Common.Entity.EntityInterface;
-using Microsoft.EntityFrameworkCore;
+using System.Collections.ObjectModel;
 
 namespace PortKisel.Common.Entity.Repositories
 {

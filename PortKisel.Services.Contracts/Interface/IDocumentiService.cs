@@ -1,4 +1,5 @@
 ﻿using PortKisel.Services.Contracts.Models;
+using PortKisel.Services.Contracts.ModelsRequest;
 
 namespace PortKisel.Services.Contracts.Interface
 {
@@ -7,16 +8,26 @@ namespace PortKisel.Services.Contracts.Interface
         /// <summary>
         /// Получить список всех <see cref="DocumentiModel"/>
         /// </summary>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
         Task<IEnumerable<DocumentiModel>> GetAllAsync(CancellationToken cancellationToken);
 
         /// <summary>
         /// Получить <see cref="DocumentiModel"/> по id
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
         Task<DocumentiModel?> GetByAsync(Guid id, CancellationToken cancellationToken);
+
+        /// <summary>
+        /// Добавление новый груза
+        /// </summary>
+        Task<DocumentiModel> AddAsync(DocumentiRequestModel documenti, CancellationToken cancellationToken);
+
+        /// <summary>
+        /// Изменяет существующий груз
+        /// </summary>
+        Task<DocumentiModel> UpdateAsync(DocumentiRequestModel source, CancellationToken cancellationToken);
+
+        /// <summary>
+        /// Удаляет существующий груз
+        /// </summary>
+        Task<DocumentiModel> DeleteAsync(Guid id, CancellationToken cancellationToken);
     }
 }

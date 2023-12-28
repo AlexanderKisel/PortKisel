@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using PortKisel.Api.Models;
 using PortKisel.Services.Contracts.Interface;
-using AutoMapper;
 
 namespace PortKisel.Controllers
 {

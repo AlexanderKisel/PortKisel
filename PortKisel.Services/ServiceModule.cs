@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using PortKisel.Common;
 using PortKisel.Services.AutoMappers;
 using PortKisel.Shared;
-using PortKisel.Common;
 
 namespace PortKisel.Services
 {

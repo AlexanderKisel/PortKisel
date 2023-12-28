@@ -6,7 +6,7 @@ namespace PortKisel.Context
 {
     public class SampleContextFactory : IDesignTimeDbContextFactory<PortContext>
     {
-        public PortContext CreateDbContext(string[] options)
+        public PortContext CreateDbContext(string[] args)
         {
             var configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())

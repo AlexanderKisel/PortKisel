@@ -1,8 +1,8 @@
-﻿using PortKisel.Common.Entity.InterfaceDB;
+﻿using Microsoft.EntityFrameworkCore;
+using PortKisel.Common.Entity.InterfaceDB;
+using PortKisel.Common.Entity.Repositories;
 using PortKisel.Context.Contracts.Models;
 using PortKisel.Repositories.Contracts.Interface;
-using PortKisel.Common.Entity.Repositories;
-using Microsoft.EntityFrameworkCore;
 
 
 namespace PortKisel.Repositories.Implementations

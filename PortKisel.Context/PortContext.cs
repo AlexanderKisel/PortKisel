@@ -1,8 +1,8 @@
-﻿using PortKisel.Common.Entity.InterfaceDB;
+﻿using Microsoft.EntityFrameworkCore;
+using PortKisel.Common.Entity.InterfaceDB;
+using PortKisel.Context.Configuration;
 using PortKisel.Context.Contracts;
 using PortKisel.Context.Contracts.Models;
-using PortKisel.Context.Configuration;
-using Microsoft.EntityFrameworkCore;
 
 namespace PortKisel.Context
 {
@@ -28,6 +28,11 @@ namespace PortKisel.Context
         public DbSet<CompanyZakazchik> CompanyZakazchiks { get; set; }
         public DbSet<Documenti> Documentis { get; set; }
         public DbSet<Staff> Staffs { get; set; }
+
+        public PortContext(DbContextOptions<PortContext> options) : base(options)
+        {
+
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -1,7 +1,7 @@
-﻿using PortKisel.Context;
+﻿using PortKisel.Common;
+using PortKisel.Context;
 using PortKisel.Repositories;
 using PortKisel.Services;
-using PortKisel.Common;
 using PortKisel.Shared;
 
 namespace PortKisel.Api.Infrastructures

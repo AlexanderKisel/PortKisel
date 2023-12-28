@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using PortKisel.Repositories.Contracts.Interface;
 using PortKisel.Services.Contracts.Interface;
-using PortKisel.Services.Contracts.Models;
+using PortKisel.Services.Contracts.ModelsRequest;
 
 namespace PortKisel.Services.Implementations
 {
@@ -15,26 +15,26 @@ namespace PortKisel.Services.Implementations
             this.staffReadRepository = staffReadRepository;
             this.mapper = mapper;
         }
-        async Task<IEnumerable<StaffModel>> IStaffService.GetAllAsync(CancellationToken cancellationToken)
+        async Task<IEnumerable<StaffRequestModel>> IStaffService.GetAllAsync(CancellationToken cancellationToken)
         {
             var result = await staffReadRepository.GetAllAsync(cancellationToken);
-            var listStaff = new List<StaffModel>();
-            foreach(var staff in result)
+            var listStaff = new List<StaffRequestModel>();
+            foreach (var staff in result)
             {
-                var st = mapper.Map<StaffModel>(staff);
+                var st = mapper.Map<StaffRequestModel>(staff);
                 listStaff.Add(st);
             }
             return listStaff;
         }
 
-        async Task<StaffModel?> IStaffService.GetByIdAsync(Guid id, CancellationToken cancellationToken)
+        async Task<StaffRequestModel?> IStaffService.GetByIdAsync(Guid id, CancellationToken cancellationToken)
         {
             var item = await staffReadRepository.GetByIdAsync(id, cancellationToken);
             if (item == null)
             {
                 return null;
             }
-            var st = mapper.Map<StaffModel>(item);
+            var st = mapper.Map<StaffRequestModel>(item);
             return st;
         }
     }

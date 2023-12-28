@@ -2,7 +2,7 @@
 
 namespace PortKisel.Context.Contracts.Models
 {
-    public class Staff: BaseAuditEntity
+    public class Staff : BaseAuditEntity
     {
         /// <summary>
         /// ФИО

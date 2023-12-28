@@ -1,6 +1,6 @@
-﻿using PortKisel.Context.Contracts.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using PortKisel.Context.Contracts.Models;
 
 namespace PortKisel.Context.Configuration
 {

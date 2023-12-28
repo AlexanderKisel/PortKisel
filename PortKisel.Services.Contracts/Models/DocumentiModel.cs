@@ -1,6 +1,4 @@
-﻿using PortKisel.Services.Contracts.Models.Enums;
-
-namespace PortKisel.Services.Contracts.Models
+﻿namespace PortKisel.Services.Contracts.Models
 {
     /// <summary>
     /// Модель документов
@@ -26,14 +24,14 @@ namespace PortKisel.Services.Contracts.Models
         /// <see cref="Cargo"/>
         /// В документе описывается определенный груз
         /// </summary>
-        public CargoModel Cargo { get; set; }
+        public Guid CargoId { get; set; }
 
 
         /// <summary>
         /// <see cref="Vessel"/>
         /// В документе описывается судно
         /// </summary>
-        public VesselModel Vessel { get; set; }
+        public Guid VesselId { get; set; }
 
         /// <summary>
         /// Ответственный за груз

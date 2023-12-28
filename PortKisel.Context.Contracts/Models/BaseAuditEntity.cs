@@ -1,12 +1,11 @@
-﻿using PortKisel.Common.Entity;
-using PortKisel.Common.Entity.EntityInterface;
+﻿using PortKisel.Common.Entity.EntityInterface;
 
 namespace PortKisel.Context.Contracts.Models
 {
     /// <summary>
     /// Базовый класс с аудитом
     /// </summary>
-    public abstract class BaseAuditEntity: IEntity,
+    public abstract class BaseAuditEntity : IEntity,
         IEntityWithId,
         IEntityAuditCreated,
         IEntityAuditUpdated,

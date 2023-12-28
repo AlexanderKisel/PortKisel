@@ -1,6 +1,4 @@
-﻿using PortKisel.Services.Contracts.Models;
-
-namespace PortKisel.Api.ModelsRequest.Documenti
+﻿namespace PortKisel.Api.ModelsRequest.Documenti
 {
     public class CreateDocumentiRequest
     {

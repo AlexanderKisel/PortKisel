@@ -28,6 +28,6 @@
         /// <summary>
         /// <see cref="CompanyZakazchik"/>
         /// </summary>
-        public CompanyZakazchikModel CompanyZakazchik{ get; set; }
+        public CompanyPerModel? CompanyZakazchik { get; set; }
     }
 }

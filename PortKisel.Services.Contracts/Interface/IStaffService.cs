@@ -1,4 +1,5 @@
 ﻿using PortKisel.Services.Contracts.Models;
+using PortKisel.Services.Contracts.ModelsRequest;
 
 namespace PortKisel.Services.Contracts.Interface
 {
@@ -7,16 +8,26 @@ namespace PortKisel.Services.Contracts.Interface
         /// <summary>
         /// Получить список всех <see cref="StaffModel"/>
         /// </summary>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
         Task<IEnumerable<StaffModel>> GetAllAsync(CancellationToken cancellationToken);
 
         /// <summary>
         /// Получить <see cref="StaffModel"/> по id
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
         Task<StaffModel?> GetByIdAsync(Guid id, CancellationToken cancellationToken);
+
+        /// <summary>
+        /// Добавление новый груза
+        /// </summary>
+        Task<StaffModel> AddAsync(StaffRequestModel staff, CancellationToken cancellationToken);
+
+        /// <summary>
+        /// Изменяет существующий груз
+        /// </summary>
+        Task<StaffModel> UpdateAsync(StaffRequestModel source, CancellationToken cancellationToken);
+
+        /// <summary>
+        /// Удаляет существующий груз
+        /// </summary>
+        Task<StaffModel> DeleteAsync(Guid id, CancellationToken cancellationToken);
     }
 }

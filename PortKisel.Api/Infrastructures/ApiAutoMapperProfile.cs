@@ -2,7 +2,6 @@
 using AutoMapper.Extensions.EnumMapping;
 using PortKisel.Api.Models;
 using PortKisel.Api.Models.Enums;
-using PortKisel.Services.Contracts.Models;
 using PortKisel.Services.Contracts.Models.Enums;
 
 
@@ -16,21 +15,21 @@ namespace PortKisel.Api.Infrastructures
                 .ConvertUsingEnumMapping(opt => opt.MapByName())
                 .ReverseMap();
 
-            CreateMap<CompanyPerModel, CompanyPerResponse>(MemberList.Destination);
-            CreateMap<CompanyZakazchikModel, CompanyZakazchikResponse>(MemberList.Destination);
+            CreateMap<CompanyPerRequestModel, CompanyPerResponse>(MemberList.Destination);
+            CreateMap<CompanyZakazchikRequestModel, CompanyZakazchikResponse>(MemberList.Destination);
 
-            CreateMap<CargoModel, CargoResponse>(MemberList.Destination)
+            CreateMap<CargoRequestModel, CargoResponse>(MemberList.Destination)
                 .ForMember(x => x.Name, opt => opt.MapFrom(x => x.CompanyZakazchik != null
                     ? $"{x.CompanyZakazchik.Name}"
                     : string.Empty));
 
-            CreateMap<VesselModel, VesselResponse>(MemberList.Destination)
+            CreateMap<VesselRequestModel, VesselResponse>(MemberList.Destination)
                 .ForMember(x => x.Name, opt => opt.MapFrom(x => x.CompanyPer != null
                     ? $"{x.CompanyPer.Name}"
                     : string.Empty));
 
-            CreateMap<StaffModel, StaffResponse>(MemberList.Destination);
-            CreateMap<DocumentiModel, DocumentiResponse>(MemberList.Destination)
+            CreateMap<StaffRequestModel, StaffResponse>(MemberList.Destination);
+            CreateMap<DocumentiRequestModel, DocumentiResponse>(MemberList.Destination)
                 .ForMember(x => x.CargoName, opt => opt.MapFrom(x => x.Cargo!.Name))
                 .ForMember(x => x.VesselName, opt => opt.MapFrom(x => x.Vessel!.Name))
                 .ForMember(x => x.CompanyPerId, opt => opt.MapFrom(x => x.Vessel!.CompanyPer))

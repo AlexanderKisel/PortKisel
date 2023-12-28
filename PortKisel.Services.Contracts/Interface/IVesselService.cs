@@ -1,4 +1,5 @@
 ﻿using PortKisel.Services.Contracts.Models;
+using PortKisel.Services.Contracts.ModelsRequest;
 
 namespace PortKisel.Services.Contracts.Interface
 {
@@ -7,16 +8,26 @@ namespace PortKisel.Services.Contracts.Interface
         /// <summary>
         /// Получить список всех <see cref="VesselModel"/>
         /// </summary>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
         Task<IEnumerable<VesselModel>> GetAllAsync(CancellationToken cancellationToken);
 
         /// <summary>
         /// Получить <see cref="VesselModel"/> по id
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
         Task<VesselModel?> GetByAsync(Guid id, CancellationToken cancellationToken);
+
+        /// <summary>
+        /// Добавление новый груза
+        /// </summary>
+        Task<VesselModel> AddAsync(VesselRequestModel vessel, CancellationToken cancellationToken);
+
+        /// <summary>
+        /// Изменяет существующий груз
+        /// </summary>
+        Task<VesselModel> UpdateAsync(VesselRequestModel source, CancellationToken cancellationToken);
+
+        /// <summary>
+        /// Удаляет существующий груз
+        /// </summary>
+        Task<VesselModel> DeleteAsync(Guid id, CancellationToken cancellationToken);
     }
 }

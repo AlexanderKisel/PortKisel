@@ -14,7 +14,7 @@
         /// ФИО
         /// </summary>
         public string FIO { get; set; } = string.Empty;
-        
+
         /// <summary>
         /// Должность
         /// </summary>

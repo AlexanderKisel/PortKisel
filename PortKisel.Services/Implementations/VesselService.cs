@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using PortKisel.Repositories.Contracts.Interface;
 using PortKisel.Services.Contracts.Interface;
-using PortKisel.Services.Contracts.Models;
+using PortKisel.Services.Contracts.ModelsRequest;
 
 namespace PortKisel.Services.Implementations
 {
@@ -19,25 +19,25 @@ namespace PortKisel.Services.Implementations
             this.companyPerReadRepository = companyPerReadRepository;
             this.mapper = mapper;
         }
-        async Task<IEnumerable<VesselModel>> IVesselService.GetAllAsync(CancellationToken cancellationToken)
+        async Task<IEnumerable<VesselRequestModel>> IVesselService.GetAllAsync(CancellationToken cancellationToken)
         {
             var result = await vesselReadRepository.GetAllAsync(cancellationToken);
             var companyPers = await companyPerReadRepository.GetByIdsAsync(result.Select(x => x.CompanyPerId).Distinct(), cancellationToken);
-            var listVessel = new List<VesselModel>();
+            var listVessel = new List<VesselRequestModel>();
             foreach (var vessel in result)
             {
-                if(!companyPers.TryGetValue(vessel.CompanyPerId, out var companyPer))
+                if (!companyPers.TryGetValue(vessel.CompanyPerId, out var companyPer))
                 {
                     continue;
                 }
-                var ves = mapper.Map<VesselModel>(vessel);
-                ves.CompanyPer = mapper.Map<CompanyPerModel>(companyPer);
+                var ves = mapper.Map<VesselRequestModel>(vessel);
+                ves.CompanyPer = mapper.Map<CompanyPerRequestModel>(companyPer);
                 listVessel.Add(ves);
             }
             return listVessel;
         }
 
-        async Task<VesselModel?> IVesselService.GetByAsync(Guid id, CancellationToken cancellationToken)
+        async Task<VesselRequestModel?> IVesselService.GetByAsync(Guid id, CancellationToken cancellationToken)
         {
             var item = await vesselReadRepository.GetByIdAsync(id, cancellationToken);
             if (item == null)
@@ -46,8 +46,8 @@ namespace PortKisel.Services.Implementations
             }
 
             var companyPer = await companyPerReadRepository.GetByIdAsync(item.CompanyPerId, cancellationToken);
-            var vessel = mapper.Map<VesselModel>(item);
-            vessel.CompanyPer = mapper.Map<CompanyPerModel>(companyPer);
+            var vessel = mapper.Map<VesselRequestModel>(item);
+            vessel.CompanyPer = mapper.Map<CompanyPerRequestModel>(companyPer);
 
             return vessel;
         }

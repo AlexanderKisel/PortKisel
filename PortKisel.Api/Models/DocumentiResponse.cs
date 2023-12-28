@@ -1,6 +1,4 @@
-﻿using PortKisel.Services.Contracts.Models;
-
-namespace PortKisel.Api.Models
+﻿namespace PortKisel.Api.Models
 {
     /// <summary>
     /// Модель ответа сущности документов
@@ -23,22 +21,22 @@ namespace PortKisel.Api.Models
         public DateTime IssaedAt { get; set; }
 
         /// <summary>
-        /// <see cref="CargoModel"/>
+        /// <see cref="CargoRequestModel"/>
         /// </summary>
         public string CargoName { get; set; }
 
         /// <summary>
-        /// <see cref="CargoModel"/>
+        /// <see cref="CargoRequestModel"/>
         /// </summary>
         public string CargoWeight { get; set; }
 
         /// <summary>
-        /// <see cref="VesselModel"/>
+        /// <see cref="VesselRequestModel"/>
         /// </summary>
         public string VesselName { get; set; }
 
         /// <summary>
-        /// <see cref="VesselModel"/>
+        /// <see cref="VesselRequestModel"/>
         /// </summary>
         public string VesselLoadCapacity { get; set; }
 
