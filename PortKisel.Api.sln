@@ -5,8 +5,6 @@ VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PortKisel.Api", "PortKisel.Api\PortKisel.Api.csproj", "{42333930-6C59-4D29-BCF2-1D8C064A961A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PortKisel.Api.Tests", "Port.Api.Tests\PortKisel.Api.Tests.csproj", "{E2AA6A70-0421-4C78-811A-993D5E6F3337}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PortKisel.Context", "PortKisel.Context\PortKisel.Context.csproj", "{8B3DA96D-17F3-4218-B3B4-378F3A619CE2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PortKisel.Context.Contracts", "PortKisel.Context.Contracts\PortKisel.Context.Contracts.csproj", "{62766E71-61BB-4F8E-9FF2-07CFB98ADD65}"
@@ -15,13 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PortKisel.Repositories", "P
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PortKisel.Repositories.Contracts", "PortKisel.Repositories.Contracts\PortKisel.Repositories.Contracts.csproj", "{8E5C3AF8-4AA4-46C8-A2BA-F9AA6A12EEB1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PortKisel.Repositories.Tests", "PortKisel.Repositories.Tests\PortKisel.Repositories.Tests.csproj", "{900F9994-7D24-4E3C-BB0C-119600E70B54}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PortKisel.Services", "PortKisel.Services\PortKisel.Services.csproj", "{B1918516-435C-4144-9302-F20ABFFBF3DC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PortKisel.Services.Contracts", "PortKisel.Services.Contracts\PortKisel.Services.Contracts.csproj", "{498464E4-CAEB-4D72-9DF0-DFF79C4CA530}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PortKisel.Services.Tests", "PortKisel.Services.Tests\PortKisel.Services.Tests.csproj", "{D6D90C6D-69C8-4281-9521-54AD12A1C17F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PortKisel.Shared", "PortKisel.Shared\PortKisel.Shared.csproj", "{03781C18-9DCE-45DB-A1DC-272B39D48E3E}"
 EndProject
@@ -30,6 +24,14 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PortKisel.Common.Entity", "PortKisel.Common.Entity\PortKisel.Common.Entity.csproj", "{43B723B5-3390-4423-AD5A-6EDD64502B3E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PortKisel.Context.Configuration", "Context.Contracts.Configuration\PortKisel.Context.Configuration.csproj", "{1F5BA15D-3B54-41DF-B72F-8448A15DCAE5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortKisel.Services.Tests", "PortKisel.Services.Tests\PortKisel.Services.Tests.csproj", "{E5DEE5AD-E61A-4F4A-A868-F3BA52A3139F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortKisel.Context.Tests", "PortKisel.Context.Tests\PortKisel.Context.Tests.csproj", "{5ADCC0CE-1A83-44E5-880F-4E1544D2DC70}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortKisel.Repositories.Tests", "PortKisel.Repositories.Tests\PortKisel.Repositories.Tests.csproj", "{0DA81015-C49A-461D-B813-81DDF6868D89}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortKisel.Api.Tests", "PortKisel.Api.Tests\PortKisel.Api.Tests.csproj", "{3651631B-22D6-476E-B671-21FC28142347}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +43,6 @@ Global
 		{42333930-6C59-4D29-BCF2-1D8C064A961A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{42333930-6C59-4D29-BCF2-1D8C064A961A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{42333930-6C59-4D29-BCF2-1D8C064A961A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E2AA6A70-0421-4C78-811A-993D5E6F3337}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E2AA6A70-0421-4C78-811A-993D5E6F3337}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E2AA6A70-0421-4C78-811A-993D5E6F3337}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E2AA6A70-0421-4C78-811A-993D5E6F3337}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8B3DA96D-17F3-4218-B3B4-378F3A619CE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8B3DA96D-17F3-4218-B3B4-378F3A619CE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B3DA96D-17F3-4218-B3B4-378F3A619CE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -61,10 +59,6 @@ Global
 		{8E5C3AF8-4AA4-46C8-A2BA-F9AA6A12EEB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E5C3AF8-4AA4-46C8-A2BA-F9AA6A12EEB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E5C3AF8-4AA4-46C8-A2BA-F9AA6A12EEB1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{900F9994-7D24-4E3C-BB0C-119600E70B54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{900F9994-7D24-4E3C-BB0C-119600E70B54}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{900F9994-7D24-4E3C-BB0C-119600E70B54}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{900F9994-7D24-4E3C-BB0C-119600E70B54}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B1918516-435C-4144-9302-F20ABFFBF3DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B1918516-435C-4144-9302-F20ABFFBF3DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1918516-435C-4144-9302-F20ABFFBF3DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -73,10 +67,6 @@ Global
 		{498464E4-CAEB-4D72-9DF0-DFF79C4CA530}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{498464E4-CAEB-4D72-9DF0-DFF79C4CA530}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{498464E4-CAEB-4D72-9DF0-DFF79C4CA530}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D6D90C6D-69C8-4281-9521-54AD12A1C17F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D6D90C6D-69C8-4281-9521-54AD12A1C17F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D6D90C6D-69C8-4281-9521-54AD12A1C17F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D6D90C6D-69C8-4281-9521-54AD12A1C17F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{03781C18-9DCE-45DB-A1DC-272B39D48E3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{03781C18-9DCE-45DB-A1DC-272B39D48E3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03781C18-9DCE-45DB-A1DC-272B39D48E3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -93,6 +83,22 @@ Global
 		{1F5BA15D-3B54-41DF-B72F-8448A15DCAE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F5BA15D-3B54-41DF-B72F-8448A15DCAE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F5BA15D-3B54-41DF-B72F-8448A15DCAE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5DEE5AD-E61A-4F4A-A868-F3BA52A3139F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5DEE5AD-E61A-4F4A-A868-F3BA52A3139F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5DEE5AD-E61A-4F4A-A868-F3BA52A3139F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5DEE5AD-E61A-4F4A-A868-F3BA52A3139F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5ADCC0CE-1A83-44E5-880F-4E1544D2DC70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5ADCC0CE-1A83-44E5-880F-4E1544D2DC70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5ADCC0CE-1A83-44E5-880F-4E1544D2DC70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5ADCC0CE-1A83-44E5-880F-4E1544D2DC70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DA81015-C49A-461D-B813-81DDF6868D89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DA81015-C49A-461D-B813-81DDF6868D89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DA81015-C49A-461D-B813-81DDF6868D89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DA81015-C49A-461D-B813-81DDF6868D89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3651631B-22D6-476E-B671-21FC28142347}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3651631B-22D6-476E-B671-21FC28142347}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3651631B-22D6-476E-B671-21FC28142347}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3651631B-22D6-476E-B671-21FC28142347}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

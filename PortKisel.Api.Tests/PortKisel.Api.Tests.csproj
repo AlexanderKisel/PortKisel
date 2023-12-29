@@ -10,9 +10,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="12.0.1" />
-    <PackageReference Include="FluentAssertions" Version="6.12.0" />
-    <PackageReference Include="FluentValidation" Version="11.8.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.5.0" />
     <PackageReference Include="xunit" Version="2.4.2" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5">
@@ -26,10 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PortKisel.Api\PortKisel.Api.csproj" />
-    <ProjectReference Include="..\PortKisel.Context.Tests\PortKisel.Context.Tests.csproj" />
-    <ProjectReference Include="..\PortKisel.Services.Contracts\PortKisel.Services.Contracts.csproj" />
-    <ProjectReference Include="..\PortKisel.Services\PortKisel.Services.csproj" />
+    <Folder Include="TestValidators\" />
   </ItemGroup>
 
 </Project>
