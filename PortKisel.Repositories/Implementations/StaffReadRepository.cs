@@ -1,4 +1,6 @@
-﻿using PortKisel.Context.Contracts;
+﻿using Microsoft.EntityFrameworkCore;
+using PortKisel.Common.Entity.InterfaceDB;
+using PortKisel.Common.Entity.Repositories;
 using PortKisel.Context.Contracts.Models;
 using PortKisel.Repositories.Contracts.Interface;
 
@@ -6,24 +8,31 @@ namespace PortKisel.Repositories.Implementations
 {
     public class StaffReadRepository : IStaffReadRepository, IRepositoryAnchor
     {
-        private readonly IPortContext context;
+        private readonly IDbRead reader;
 
-        public StaffReadRepository(IPortContext context)
+        public StaffReadRepository(IDbRead reader)
         {
-            this.context = context;
+            this.reader = reader;
         }
 
         Task<List<Staff>> IStaffReadRepository.GetAllAsync(CancellationToken cancellationToken)
-            => Task.FromResult(context.Staffs.Where(x => x.DeletedAt == null)
-                .OrderBy(x => x.Post)
-                .ToList());
+            => reader.Read<Staff>()
+            .NotDeletedAt()
+            .OrderBy(x => x.FIO)
+            .ThenBy(x => x.Post)
+            .ToListAsync(cancellationToken);
 
         Task<Staff?> IStaffReadRepository.GetByIdAsync(Guid id, CancellationToken cancellationToken)
-            => Task.FromResult(context.Staffs.FirstOrDefault(x => x.Id == id));
+            => reader.Read<Staff>()
+            .ById(id)
+            .FirstOrDefaultAsync(cancellationToken);
 
         Task<Dictionary<Guid, Staff>> IStaffReadRepository.GetByIdsAsync(IEnumerable<Guid> ids, CancellationToken cancellationToken)
-            => Task.FromResult(context.Staffs.Where(x => x.DeletedAt == null && ids.Contains(x.Id))
-                .OrderBy(x => x.Post)
-                .ToDictionary(x => x.Id));
+            => reader.Read<Staff>()
+                .NotDeletedAt()
+                .ByIds(ids)
+                .OrderBy(x => x.FIO)
+                .ThenBy(x => x.Post)
+                .ToDictionaryAsync(key => key.Id, cancellationToken);
     }
 }

@@ -1,7 +1,13 @@
 ﻿using AutoMapper;
+using PortKisel.Common.Entity.InterfaceDB;
+using PortKisel.Context.Contracts.Enums;
+using PortKisel.Context.Contracts.Models;
 using PortKisel.Repositories.Contracts.Interface;
+using PortKisel.Repositories.Implementations;
+using PortKisel.Services.Contracts.Exceptions;
 using PortKisel.Services.Contracts.Interface;
 using PortKisel.Services.Contracts.Models;
+using PortKisel.Services.Contracts.ModelsRequest;
 
 namespace PortKisel.Services.Implementations
 {
@@ -10,31 +16,42 @@ namespace PortKisel.Services.Implementations
         private readonly IVesselReadRepository vesselReadRepository;
         private readonly ICompanyPerReadRepository companyPerReadRepository;
         private readonly IMapper mapper;
+        private readonly IUnitOfWork unitOfWork;
+        private readonly IVesselWriteRepository vesselWriteRepository;
 
         public VesselService(IVesselReadRepository vesselReadRepository,
             ICompanyPerReadRepository companyPerReadRepository,
-            IMapper mapper)
+            IMapper mapper,
+            IUnitOfWork unitOfWork,
+            IVesselWriteRepository vesselWriteRepository)
         {
             this.vesselReadRepository = vesselReadRepository;
             this.companyPerReadRepository = companyPerReadRepository;
             this.mapper = mapper;
+            this.unitOfWork = unitOfWork;
+            this.vesselWriteRepository = vesselWriteRepository;
         }
+
         async Task<IEnumerable<VesselModel>> IVesselService.GetAllAsync(CancellationToken cancellationToken)
         {
-            var result = await vesselReadRepository.GetAllAsync(cancellationToken);
-            var companyPers = await companyPerReadRepository.GetByIdsAsync(result.Select(x => x.CompanyPerId).Distinct(), cancellationToken);
-            var listVessel = new List<VesselModel>();
-            foreach (var vessel in result)
+            var vessels = await vesselReadRepository.GetAllAsync(cancellationToken);
+            var companyPerIds = vessels.Select(x => x.CompanyPerId).Distinct();
+
+            var companyPerDictionary = await companyPerReadRepository.GetByIdsAsync(companyPerIds, cancellationToken);
+
+            var listVesselModel = new List<VesselModel>();
+            foreach (var vessel in vessels)
             {
-                if(!companyPers.TryGetValue(vessel.CompanyPerId, out var companyPer))
+                if (!companyPerDictionary.TryGetValue(vessel.CompanyPerId, out var companyPer))
                 {
                     continue;
                 }
-                var ves = mapper.Map<VesselModel>(vessel);
-                ves.CompanyPer = mapper.Map<CompanyPerModel>(companyPer);
-                listVessel.Add(ves);
+                var vesselMap = mapper.Map<VesselModel>(vessel);
+                vesselMap.CompanyPer = mapper.Map<CompanyPerModel>(companyPer);
+                listVesselModel.Add(vesselMap);
             }
-            return listVessel;
+
+            return listVesselModel;
         }
 
         async Task<VesselModel?> IVesselService.GetByAsync(Guid id, CancellationToken cancellationToken)
@@ -48,8 +65,26 @@ namespace PortKisel.Services.Implementations
             var companyPer = await companyPerReadRepository.GetByIdAsync(item.CompanyPerId, cancellationToken);
             var vessel = mapper.Map<VesselModel>(item);
             vessel.CompanyPer = mapper.Map<CompanyPerModel>(companyPer);
+            vessel.CompanyPer = companyPer != null
+                ? mapper.Map<CompanyPerModel>(companyPer)
+                : null;
 
             return vessel;
+        }
+
+        Task<VesselModel> IVesselService.AddAsync(VesselRequestModel vessel, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<VesselModel> IVesselService.UpdateAsync(VesselRequestModel source, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task IVesselService.DeleteAsync(Guid id, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -24,15 +24,30 @@ namespace PortKisel.Context.Contracts.Models
         public Guid CargoId { get; set; }
 
         /// <summary>
+        /// Груз
+        /// </summary>
+        public Cargo? Cargo { get; set; }
+
+        /// <summary>
         /// <see cref="Vessel"/>
         /// В документе описывается судно
         /// </summary>
         public Guid VesselId { get; set; }
 
         /// <summary>
+        /// Судно
+        /// </summary>
+        public Vessel? Vessel { get; set; }
+
+        /// <summary>
         /// Ответственный за груз
         /// </summary>
-        public Guid? Responsible_cargoId { get; set; }
+        public Guid Responsible_cargoId { get; set; }
+
+        /// <summary>
+        /// Работник
+        /// </summary>
+        public Staff? Staff { get; set; }
 
         /// <summary>
         /// Ответственный за груз

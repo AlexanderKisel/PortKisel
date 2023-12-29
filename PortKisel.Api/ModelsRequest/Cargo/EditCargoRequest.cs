@@ -1,6 +1,6 @@
 ﻿namespace PortKisel.Api.ModelsRequest.Cargo
 {
-    public class CargoRequest : CreateCargoRequest
+    public class EditCargoRequest : CreateCargoRequest
     {
         /// <summary>
         /// Идентификатор

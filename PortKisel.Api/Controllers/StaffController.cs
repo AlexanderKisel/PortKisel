@@ -36,7 +36,7 @@ namespace PortKisel.Controllers
         public async Task<IActionResult> GetById(Guid id, CancellationToken cancellationToken)
         {
             var result = await staffService.GetByIdAsync(id, cancellationToken);
-            if(result == null)
+            if (result == null)
             {
                 return NotFound($"Не удалось найти сотрудника с идентификатором {id}");
             }

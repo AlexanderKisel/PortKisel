@@ -1,6 +1,4 @@
-﻿using PortKisel.Services.Contracts.Models;
-
-namespace PortKisel.Api.Models
+﻿namespace PortKisel.Api.Models
 {
     /// <summary>
     /// Модель ответа сущности документов
@@ -23,38 +21,28 @@ namespace PortKisel.Api.Models
         public DateTime IssaedAt { get; set; }
 
         /// <summary>
-        /// <see cref="CargoModel"/>
+        /// <see cref="CargoRequestModel"/>
         /// </summary>
         public string CargoName { get; set; }
 
         /// <summary>
-        /// <see cref="CargoModel"/>
+        /// <see cref="CargoRequestModel"/>
         /// </summary>
         public string CargoWeight { get; set; }
 
         /// <summary>
-        /// <see cref="VesselModel"/>
+        /// <see cref="VesselRequestModel"/>
         /// </summary>
         public string VesselName { get; set; }
 
         /// <summary>
-        /// <see cref="VesselModel"/>
+        /// <see cref="VesselRequestModel"/>
         /// </summary>
         public string VesselLoadCapacity { get; set; }
 
         /// <summary>
-        /// Компания перевозчик
-        /// </summary>
-        public Guid CompanyPerId { get; set; }
-
-        /// <summary>
-        /// Компания заказчик
-        /// </summary>
-        public Guid CompanyZakazchikId { get; set; }
-
-        /// <summary>
         /// Пост
         /// </summary>
-        public string Responsible_cargoName { get; set; }
+        public string StaffName { get; set; }
     }
 }

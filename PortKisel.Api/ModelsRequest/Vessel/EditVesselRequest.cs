@@ -1,6 +1,6 @@
 ﻿namespace PortKisel.Api.ModelsRequest.Vessel
 {
-    public class VesselRequest : CreateVesselRequest
+    public class EditVesselRequest : CreateVesselRequest
     {
         public Guid Id { get; set; }
     }

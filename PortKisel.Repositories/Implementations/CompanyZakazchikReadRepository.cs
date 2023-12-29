@@ -1,29 +1,39 @@
-﻿using PortKisel.Context.Contracts;
+﻿using Microsoft.EntityFrameworkCore;
+using PortKisel.Common.Entity.InterfaceDB;
+using PortKisel.Common.Entity.Repositories;
 using PortKisel.Context.Contracts.Models;
 using PortKisel.Repositories.Contracts.Interface;
+
 
 namespace PortKisel.Repositories.Implementations
 {
     public class CompanyZakazchikReadRepository : ICompanyZakazchikReadRepository, IRepositoryAnchor
     {
-        private readonly IPortContext context;
+        private readonly IDbRead reader;
 
-        public CompanyZakazchikReadRepository(IPortContext context)
+        public CompanyZakazchikReadRepository(IDbRead reader)
         {
-            this.context = context;
+            this.reader = reader;
         }
 
         Task<List<CompanyZakazchik>> ICompanyZakazchikReadRepository.GetAllAsync(CancellationToken cancellationToken)
-            => Task.FromResult(context.CompanyZakazchiks.Where(x => x.DeletedAt == null)
-                .OrderBy(x => x.Name)
-                .ToList());
+            => reader.Read<CompanyZakazchik>()
+            .NotDeletedAt()
+            .OrderBy(x => x.Name)
+            .ThenBy(x => x.Description)
+            .ToListAsync(cancellationToken);
 
         Task<CompanyZakazchik?> ICompanyZakazchikReadRepository.GetByIdAsync(Guid id, CancellationToken cancellationToken)
-            => Task.FromResult(context.CompanyZakazchiks.FirstOrDefault(x => x.Id == id));
+            => reader.Read<CompanyZakazchik>()
+            .ById(id)
+            .FirstOrDefaultAsync(cancellationToken);
 
         Task<Dictionary<Guid, CompanyZakazchik>> ICompanyZakazchikReadRepository.GetByIdsAsync(IEnumerable<Guid> ids, CancellationToken cancellationToken)
-            => Task.FromResult(context.CompanyZakazchiks.Where(x => x.DeletedAt == null && ids.Contains(x.Id))
-                .OrderBy(x => x.Name)
-                .ToDictionary(x => x.Id));
+            => reader.Read<CompanyZakazchik>()
+            .NotDeletedAt()
+            .ByIds(ids)
+            .OrderBy(x => x.Name)
+            .ThenBy(x => x.Description)
+            .ToDictionaryAsync(key => key.Id, cancellationToken);
     }
 }

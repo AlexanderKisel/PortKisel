@@ -9,7 +9,7 @@ public enum PostModels
     /// Неопределенно
     /// </summary>
     None,
-    
+
     /// <summary>
     /// Ответственный за груз
     /// </summary>

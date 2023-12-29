@@ -25,5 +25,15 @@
         /// </summary>
         public Guid CompanyZakazchikId { get; set; }
 
+        /// <summary>
+        /// Компания заказчик
+        /// </summary>
+        public CompanyZakazchik? CompanyZakazchik { get; set; }
+
+        /// <summary>
+        /// Список документов
+        /// </summary>
+        public IEnumerable<Documenti>? Documenti { get; set; }
+
     }
 }

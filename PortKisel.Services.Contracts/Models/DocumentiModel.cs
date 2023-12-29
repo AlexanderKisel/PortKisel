@@ -1,4 +1,4 @@
-﻿using PortKisel.Services.Contracts.Models.Enums;
+﻿using PortKisel.Context.Contracts.Models;
 
 namespace PortKisel.Services.Contracts.Models
 {
@@ -26,18 +26,18 @@ namespace PortKisel.Services.Contracts.Models
         /// <see cref="Cargo"/>
         /// В документе описывается определенный груз
         /// </summary>
-        public CargoModel Cargo { get; set; }
+        public CargoModel? Cargo { get; set; }
 
 
         /// <summary>
         /// <see cref="Vessel"/>
         /// В документе описывается судно
         /// </summary>
-        public VesselModel Vessel { get; set; }
+        public VesselModel? Vessel { get; set; }
 
         /// <summary>
         /// Ответственный за груз
         /// </summary>
-        public StaffModel? Responsible_cargo { get; set; }
+        public StaffModel? Staff { get; set; }
     }
 }
