@@ -1,7 +1,11 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using PortKisel.Api.Attribute;
 using PortKisel.Api.Models;
+using PortKisel.Api.ModelsRequest.Documenti;
 using PortKisel.Services.Contracts.Interface;
+using PortKisel.Services.Contracts.ModelsRequest;
+using PortKisel.Services.Implementations;
 using System.ComponentModel.DataAnnotations;
 
 namespace PortKisel.Controllers
@@ -24,7 +28,10 @@ namespace PortKisel.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(typeof(DocumentiResponse), StatusCodes.Status200OK)]
+        [ApiOk]
+        [ApiConflict]
+        [ApiNotFound]
+        [ApiNotAcceptable]
         public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
         {
             var result = await documentiService.GetAllAsync(cancellationToken);
@@ -32,8 +39,10 @@ namespace PortKisel.Controllers
         }
 
         [HttpGet("{id:guid}")]
-        [ProducesResponseType(typeof(DocumentiResponse), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ApiOk]
+        [ApiConflict]
+        [ApiNotFound]
+        [ApiNotAcceptable]
         public async Task<IActionResult> GetById([Required] Guid id, CancellationToken cancellationToken)
         {
             var result = await documentiService.GetByIdAsync(id, cancellationToken);
@@ -43,6 +52,49 @@ namespace PortKisel.Controllers
             }
 
             return Ok(mapper.Map<DocumentiResponse>(result));
+        }
+        /// <summary>
+        /// Создаёт новый документ
+        /// </summary>
+        [HttpPost]
+        [ApiOk]
+        [ApiConflict]
+        [ApiNotFound]
+        [ApiNotAcceptable]
+        public async Task<IActionResult> Create(CreateDocumentiRequest request, CancellationToken cancellationToken)
+        {
+            var documentiRequestModel = mapper.Map<DocumentiRequestModel>(request);
+            var result = await documentiService.AddAsync(documentiRequestModel, cancellationToken);
+            return Ok(mapper.Map<DocumentiResponse>(result));
+        }
+
+        /// <summary>
+        /// Редактирует имеющийся документ
+        /// </summary>
+        [HttpPut]
+        [ApiOk]
+        [ApiConflict]
+        [ApiNotFound]
+        [ApiNotAcceptable]
+        public async Task<IActionResult> Edit(EditDocumentiRequest request, CancellationToken cancellationToken)
+        {
+            var model = mapper.Map<DocumentiRequestModel>(request);
+            var result = await documentiService.UpdateAsync(model, cancellationToken);
+            return Ok(mapper.Map<DocumentiResponse>(result));
+        }
+
+        /// <summary>
+        /// Удаляет имеющийся документ по id
+        /// </summary>
+        [HttpDelete("{id}")]
+        [ApiOk]
+        [ApiConflict]
+        [ApiNotFound]
+        [ApiNotAcceptable]
+        public async Task<IActionResult> Delete(Guid id, CancellationToken cancellationToken)
+        {
+            await documentiService.DeleteAsync(id, cancellationToken);
+            return Ok();
         }
     }
 }
