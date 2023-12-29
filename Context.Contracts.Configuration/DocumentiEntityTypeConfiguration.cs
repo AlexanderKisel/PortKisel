@@ -15,7 +15,7 @@ namespace PortKisel.Context.Configuration
             builder.Property(x => x.IssaedAt).IsRequired();
             builder.Property(x => x.CargoId).IsRequired();
             builder.Property(x => x.VesselId).IsRequired();
-            builder.Property(x => x.Responsible_cargoId).IsRequired();
+            builder.Property(x => x.StaffId).IsRequired();
         }
     }
 }

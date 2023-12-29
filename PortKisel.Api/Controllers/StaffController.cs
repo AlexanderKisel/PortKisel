@@ -1,7 +1,12 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using PortKisel.Api.Attribute;
+using PortKisel.Api.Infrastructures.Validator;
 using PortKisel.Api.Models;
+using PortKisel.Api.ModelsRequest.Staff;
 using PortKisel.Services.Contracts.Interface;
+using PortKisel.Services.Contracts.ModelsRequest;
+using PortKisel.Services.Implementations;
 
 namespace PortKisel.Controllers
 {
@@ -15,15 +20,20 @@ namespace PortKisel.Controllers
     {
         private readonly IStaffService staffService;
         private readonly IMapper mapper;
+        private readonly IApiValidatorService validatorService;
 
-        public StaffController(IStaffService staffService, IMapper mapper)
+        public StaffController(IStaffService staffService, IMapper mapper, IApiValidatorService validatorService)
         {
             this.staffService = staffService;
             this.mapper = mapper;
+            this.validatorService = validatorService;
         }
 
         [HttpGet]
-        [ProducesResponseType(typeof(StaffResponse), StatusCodes.Status200OK)]
+        [ApiOk]
+        [ApiConflict]
+        [ApiNotFound]
+        [ApiNotAcceptable]
         public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
         {
             var result = await staffService.GetAllAsync(cancellationToken);
@@ -31,8 +41,10 @@ namespace PortKisel.Controllers
         }
 
         [HttpGet("{id:guid}")]
-        [ProducesResponseType(typeof(StaffResponse), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ApiOk]
+        [ApiConflict]
+        [ApiNotFound]
+        [ApiNotAcceptable]
         public async Task<IActionResult> GetById(Guid id, CancellationToken cancellationToken)
         {
             var result = await staffService.GetByIdAsync(id, cancellationToken);
@@ -42,6 +54,53 @@ namespace PortKisel.Controllers
             }
 
             return Ok(mapper.Map<StaffResponse>(result));
+        }
+        /// <summary>
+        /// Создаёт нового работника
+        /// </summary>
+        [HttpPost]
+        [ApiOk]
+        [ApiConflict]
+        [ApiNotFound]
+        [ApiNotAcceptable]
+        public async Task<IActionResult> Create(CreateStaffRequest request, CancellationToken cancellationToken)
+        {
+            await validatorService.ValidateAsync(request, cancellationToken);
+
+            var staffRequestModel = mapper.Map<StaffRequestModel>(request);
+            var result = await staffService.AddAsync(staffRequestModel, cancellationToken);
+            return Ok(mapper.Map<StaffResponse>(result));
+        }
+
+        /// <summary>
+        /// Редактирует имеющегося работника
+        /// </summary>
+        [HttpPut]
+        [ApiOk]
+        [ApiConflict]
+        [ApiNotFound]
+        [ApiNotAcceptable]
+        public async Task<IActionResult> Edit(EditStaffRequest request, CancellationToken cancellationToken)
+        {
+            await validatorService.ValidateAsync(request, cancellationToken);
+
+            var model = mapper.Map<StaffRequestModel>(request);
+            var result = await staffService.UpdateAsync(model, cancellationToken);
+            return Ok(mapper.Map<StaffResponse>(result));
+        }
+
+        /// <summary>
+        /// Удаляет имеющегося работника по id
+        /// </summary>
+        [HttpDelete("{id}")]
+        [ApiOk]
+        [ApiConflict]
+        [ApiNotFound]
+        [ApiNotAcceptable]
+        public async Task<IActionResult> Delete(Guid id, CancellationToken cancellationToken)
+        {
+            await staffService.DeleteAsync(id, cancellationToken);
+            return Ok();
         }
     }
 }

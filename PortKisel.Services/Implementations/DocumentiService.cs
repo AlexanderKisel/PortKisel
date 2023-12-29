@@ -41,7 +41,7 @@ namespace PortKisel.Services.Implementations
             var documentis = await documentiReadRepository.GetAllAsync(cancellationToken);
             var cargoIds = documentis.Select(x => x.CargoId).Distinct();
             var vesselIds = documentis.Select(x => x.VesselId).Distinct();
-            var staffIds = documentis.Select(x => x.Responsible_cargoId).Distinct();
+            var staffIds = documentis.Select(x => x.StaffId).Distinct();
 
             var cargoDictionary = await cargoReadRepository.GetByIdsAsync(cargoIds, cancellationToken);
             var vesselDictionary = await vesselReadRepository.GetByIdsAsync(vesselIds, cancellationToken);
@@ -58,7 +58,7 @@ namespace PortKisel.Services.Implementations
                 {
                     continue;
                 }
-                if (!staffDictionary.TryGetValue(documenti.Responsible_cargoId, out var responsible_cargo))
+                if (!staffDictionary.TryGetValue(documenti.StaffId, out var responsible_cargo))
                 {
                     continue;
                 }
@@ -81,7 +81,7 @@ namespace PortKisel.Services.Implementations
             }
             var cargo = await cargoReadRepository.GetByIdAsync(item.CargoId, cancellationToken);
             var vessel = await vesselReadRepository.GetByIdAsync(item.VesselId, cancellationToken);
-            var staff = await staffReadRepository.GetByIdAsync(item.Responsible_cargoId, cancellationToken);
+            var staff = await staffReadRepository.GetByIdAsync(item.StaffId, cancellationToken);
             var doc = mapper.Map<DocumentiModel>(item);
             doc.Cargo = cargo != null
                 ? mapper.Map<CargoModel>(cargo)
@@ -104,7 +104,7 @@ namespace PortKisel.Services.Implementations
                 IssaedAt = documenti.IssaedAt,
                 CargoId = documenti.CargoId,
                 VesselId = documenti.VesselId,
-                Responsible_cargoId = documenti.Responsible_cargoId
+                StaffId = documenti.StaffId
             };
 
             documentiWriteRepository.Add(item);
@@ -127,8 +127,8 @@ namespace PortKisel.Services.Implementations
             var vessel = await vesselReadRepository.GetByIdAsync(source.VesselId, cancellationToken);
             targetDoc.VesselId = vessel.Id;
 
-            var staff = await staffReadRepository.GetByIdAsync(source.Responsible_cargoId, cancellationToken);
-            targetDoc.Responsible_cargoId = staff.Id;
+            var staff = await staffReadRepository.GetByIdAsync(source.StaffId, cancellationToken);
+            targetDoc.StaffId = staff.Id;
 
             documentiWriteRepository.Update(targetDoc);
             await unitOfWork.SaveChangesAsync(cancellationToken);

@@ -36,6 +36,6 @@
         /// <summary>
         /// Ответственный за груз
         /// </summary>
-        public Guid Responsible_cargoId { get; set; }
+        public Guid StaffId { get; set; }
     }
 }

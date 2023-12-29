@@ -72,19 +72,55 @@ namespace PortKisel.Services.Implementations
             return vessel;
         }
 
-        Task<VesselModel> IVesselService.AddAsync(VesselRequestModel vessel, CancellationToken cancellationToken)
+        async Task<VesselModel> IVesselService.AddAsync(VesselRequestModel vessel, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var item = new Vessel
+            {
+                Id = Guid.NewGuid(),
+                Name = vessel.Name,
+                Description = vessel.Description,
+                CompanyPerId = vessel.CompanyPerId,
+                LoadCapacity = vessel.LoadCapacity
+            };
+
+            vesselWriteRepository.Add(item);
+            await unitOfWork.SaveChangesAsync(cancellationToken);
+            return mapper.Map<VesselModel>(item);
         }
 
-        Task<VesselModel> IVesselService.UpdateAsync(VesselRequestModel source, CancellationToken cancellationToken)
+        async Task<VesselModel> IVesselService.UpdateAsync(VesselRequestModel source, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var targetVessel = await vesselReadRepository.GetByIdAsync(source.Id, cancellationToken);
+            if (targetVessel == null)
+            {
+                throw new PortEntityNotFoundException<Vessel>(source.Id);
+            }
+            targetVessel.Name = source.Name;
+            targetVessel.Description = source.Description;
+            targetVessel.LoadCapacity = source.LoadCapacity;
+
+            var companyPer = await companyPerReadRepository.GetByIdAsync(source.CompanyPerId, cancellationToken);
+            targetVessel.CompanyPerId = companyPer.Id;
+
+            vesselWriteRepository.Update(targetVessel);
+            await unitOfWork.SaveChangesAsync(cancellationToken);
+            return mapper.Map<VesselModel>(targetVessel);
         }
 
-        Task IVesselService.DeleteAsync(Guid id, CancellationToken cancellationToken)
+        async Task IVesselService.DeleteAsync(Guid id, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var targetVessel = await vesselReadRepository.GetByIdAsync(id, cancellationToken);
+            if (targetVessel == null)
+            {
+                throw new PortEntityNotFoundException<Vessel>(id);
+            }
+            if (targetVessel.DeletedAt.HasValue)
+            {
+                throw new PortInvalidOperationException($"Документ с идентификатором {id} уже удален");
+            }
+
+            vesselWriteRepository.Delete(targetVessel);
+            await unitOfWork.SaveChangesAsync(cancellationToken);
         }
     }
 }

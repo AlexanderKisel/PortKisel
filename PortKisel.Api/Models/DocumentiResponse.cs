@@ -13,7 +13,7 @@
         /// <summary>
         /// Номер документа
         /// </summary>
-        public string NumberDoc { get; set; } = string.Empty;
+        public string Number { get; set; } = string.Empty;
 
         /// <summary>
         /// Дата выдачи

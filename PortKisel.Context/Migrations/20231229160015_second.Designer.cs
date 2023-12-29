@@ -12,8 +12,8 @@ using PortKisel.Context;
 namespace PortKisel.Context.Migrations
 {
     [DbContext(typeof(PortContext))]
-    [Migration("20231229123212_first")]
-    partial class first
+    [Migration("20231229160015_second")]
+    partial class second
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -198,7 +198,7 @@ namespace PortKisel.Context.Migrations
                     b.Property<int?>("Responsible_cargo")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("Responsible_cargoId")
+                    b.Property<Guid>("StaffId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTimeOffset>("UpdatedAt")
@@ -216,7 +216,7 @@ namespace PortKisel.Context.Migrations
 
                     b.HasIndex("CargoId");
 
-                    b.HasIndex("Responsible_cargoId");
+                    b.HasIndex("StaffId");
 
                     b.HasIndex("VesselId");
 
@@ -338,7 +338,7 @@ namespace PortKisel.Context.Migrations
 
                     b.HasOne("PortKisel.Context.Contracts.Models.Staff", "Staff")
                         .WithMany("Documenti")
-                        .HasForeignKey("Responsible_cargoId")
+                        .HasForeignKey("StaffId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
