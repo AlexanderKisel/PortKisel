@@ -12,7 +12,7 @@ using PortKisel.Context;
 namespace PortKisel.Context.Migrations
 {
     [DbContext(typeof(PortContext))]
-    [Migration("20231229123212_first")]
+    [Migration("20231229132045_first")]
     partial class first
     {
         /// <inheritdoc />
