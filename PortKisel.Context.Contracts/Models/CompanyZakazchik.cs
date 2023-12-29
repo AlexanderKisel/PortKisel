@@ -15,6 +15,6 @@
         /// <summary>
         /// Список грузов
         /// </summary>
-        public IEnumerable<Cargo> Cargo { get; set; }
+        public IEnumerable<Cargo>? Cargo { get; set; }
     }
 }

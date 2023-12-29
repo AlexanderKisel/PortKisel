@@ -23,7 +23,7 @@
         /// <summary>
         /// Компания перевозчик
         /// </summary>
-        public Guid CompanyPerId { get; set; }
+        public CompanyPerModel? CompanyPer { get; set; }
 
         /// <summary>
         /// Грузоподъемность

@@ -28,6 +28,6 @@ namespace PortKisel.Services.Contracts.Interface
         /// <summary>
         /// Удаляет существующий груз
         /// </summary>
-        Task<VesselModel> DeleteAsync(Guid id, CancellationToken cancellationToken);
+        Task DeleteAsync(Guid id, CancellationToken cancellationToken);
     }
 }

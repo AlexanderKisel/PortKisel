@@ -2,7 +2,6 @@
 using PortKisel.Common.Entity.InterfaceDB;
 using PortKisel.Context.Contracts.Models;
 using PortKisel.Repositories.Contracts.Interface;
-using PortKisel.Repositories.Implementations;
 using PortKisel.Services.Contracts.Exceptions;
 using PortKisel.Services.Contracts.Interface;
 using PortKisel.Services.Contracts.Models;

@@ -45,7 +45,7 @@ namespace PortKisel.Services.Implementations
                     continue;
                 }
                 var cargoMap = mapper.Map<CargoModel>(cargo);
-                cargoMap.CompanyZakazchik = mapper.Map<CompanyPerModel>(companyZakazchik);
+                cargoMap.CompanyZakazchik = mapper.Map<CompanyZakazchikModel>(companyZakazchik);
                 listCargoModel.Add(cargoMap);
             }
 
@@ -59,7 +59,12 @@ namespace PortKisel.Services.Implementations
             {
                 return null;
             }
-            return mapper.Map<CargoModel>(item);
+            var companyZakazchik = await companyZakazchikReadRepository.GetByIdAsync(item.CompanyZakazchikId, cancellationToken);
+            var cargo = mapper.Map<CargoModel>(item);
+            cargo.CompanyZakazchik = companyZakazchik != null
+                ? mapper.Map<CompanyZakazchikModel>(companyZakazchik)
+                : null;
+            return cargo;
         }
 
         async Task<CargoModel> ICargoService.AddAsync(CargoRequestModel cargo, CancellationToken cancellationToken)
@@ -91,7 +96,6 @@ namespace PortKisel.Services.Implementations
 
             var companyZakazchik = await companyZakazchikReadRepository.GetByIdAsync(source.CompanyZakazchikId, cancellationToken);
             targetCargo.CompanyZakazchikId = companyZakazchik.Id;
-            targetCargo.CompanyZakazchik = companyZakazchik;
 
             cargoWriteRepository.Update(targetCargo);
             await unitOfWork.SaveChangesAsync(cancellationToken);

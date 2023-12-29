@@ -13,7 +13,7 @@ namespace PortKisel.Services.Contracts.Interface
         /// <summary>
         /// Получить <see cref="DocumentiModel"/> по id
         /// </summary>
-        Task<DocumentiModel?> GetByAsync(Guid id, CancellationToken cancellationToken);
+        Task<DocumentiModel?> GetByIdAsync(Guid id, CancellationToken cancellationToken);
 
         /// <summary>
         /// Добавление новый груза
@@ -28,6 +28,6 @@ namespace PortKisel.Services.Contracts.Interface
         /// <summary>
         /// Удаляет существующий груз
         /// </summary>
-        Task<DocumentiModel> DeleteAsync(Guid id, CancellationToken cancellationToken);
+        Task DeleteAsync(Guid id, CancellationToken cancellationToken);
     }
 }

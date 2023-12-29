@@ -1,4 +1,6 @@
-﻿namespace PortKisel.Services.Contracts.Models
+﻿using PortKisel.Context.Contracts.Models;
+
+namespace PortKisel.Services.Contracts.Models
 {
     /// <summary>
     /// Модель документов
@@ -24,18 +26,18 @@
         /// <see cref="Cargo"/>
         /// В документе описывается определенный груз
         /// </summary>
-        public Guid CargoId { get; set; }
+        public CargoModel? Cargo { get; set; }
 
 
         /// <summary>
         /// <see cref="Vessel"/>
         /// В документе описывается судно
         /// </summary>
-        public Guid VesselId { get; set; }
+        public VesselModel? Vessel { get; set; }
 
         /// <summary>
         /// Ответственный за груз
         /// </summary>
-        public StaffModel? Responsible_cargo { get; set; }
+        public StaffModel? Staff { get; set; }
     }
 }

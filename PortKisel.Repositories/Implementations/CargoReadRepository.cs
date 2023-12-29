@@ -11,7 +11,7 @@ namespace PortKisel.Repositories.Implementations
     {
         private readonly IDbRead reader;
 
-        public CargoReadRepository(IDbRead context)
+        public CargoReadRepository(IDbRead reader)
         {
             this.reader = reader;
         }

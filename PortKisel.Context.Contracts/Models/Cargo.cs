@@ -33,7 +33,7 @@
         /// <summary>
         /// Список документов
         /// </summary>
-        public IEnumerable<Documenti> Documenti { get; set; }
+        public IEnumerable<Documenti>? Documenti { get; set; }
 
     }
 }

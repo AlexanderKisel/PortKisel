@@ -15,6 +15,6 @@
         /// <summary>
         /// Список судов
         /// </summary>
-        public IEnumerable<Vessel> Vessels { get; set; }
+        public IEnumerable<Vessel>? Vessels { get; set; }
     }
 }

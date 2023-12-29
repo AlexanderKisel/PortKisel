@@ -36,7 +36,7 @@ namespace PortKisel.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetById([Required] Guid id, CancellationToken cancellationToken)
         {
-            var result = await documentiService.GetByAsync(id, cancellationToken);
+            var result = await documentiService.GetByIdAsync(id, cancellationToken);
             if (result == null)
             {
                 return NotFound($"Не удалось найти сотрудника с идентификатором {id}");

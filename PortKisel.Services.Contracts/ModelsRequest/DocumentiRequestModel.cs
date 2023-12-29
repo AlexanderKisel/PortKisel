@@ -24,18 +24,18 @@
         /// <see cref="Cargo"/>
         /// В документе описывается определенный груз
         /// </summary>
-        public CargoRequestModel Cargo { get; set; }
+        public Guid CargoId { get; set; }
 
 
         /// <summary>
         /// <see cref="Vessel"/>
         /// В документе описывается судно
         /// </summary>
-        public VesselRequestModel Vessel { get; set; }
+        public Guid VesselId { get; set; }
 
         /// <summary>
         /// Ответственный за груз
         /// </summary>
-        public StaffRequestModel? Responsible_cargo { get; set; }
+        public Guid Responsible_cargoId { get; set; }
     }
 }
