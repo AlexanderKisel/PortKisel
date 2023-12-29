@@ -1,6 +1,6 @@
 ﻿namespace PortKisel.Api.ModelsRequest.CompanyPer
 {
-    public class CompanyPerRequest : CreateCompanyPerRequest
+    public class EditCompanyPerRequest : CreateCompanyPerRequest
     {
         public Guid Id { get; set; }
     }

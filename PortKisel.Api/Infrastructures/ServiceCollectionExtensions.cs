@@ -11,6 +11,7 @@ namespace PortKisel.Api.Infrastructures
         public static void AddDependencies(this IServiceCollection service)
         {
             service.RegisterAutoMapperProfile<ApiAutoMapperProfile>();
+            service.AddTransient<IDateTimeProvider, IDateTimeProvider>();
 
             service.RegisterModule<ServiceModule>();
             service.RegisterModule<ContextModule>();

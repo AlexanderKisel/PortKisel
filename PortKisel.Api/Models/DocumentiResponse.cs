@@ -41,18 +41,8 @@
         public string VesselLoadCapacity { get; set; }
 
         /// <summary>
-        /// Компания перевозчик
-        /// </summary>
-        public Guid CompanyPerId { get; set; }
-
-        /// <summary>
-        /// Компания заказчик
-        /// </summary>
-        public Guid CompanyZakazchikId { get; set; }
-
-        /// <summary>
         /// Пост
         /// </summary>
-        public string Responsible_cargoName { get; set; }
+        public string StaffName { get; set; }
     }
 }

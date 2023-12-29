@@ -28,6 +28,6 @@
         /// <summary>
         /// Компания заказчик (владедец груза)
         /// </summary>
-        public string CompanyZakazchikName { get; set; }
+        public string? CompanyZakazchikName { get; set; }
     }
 }
