@@ -1,4 +1,5 @@
-﻿using PortKisel.Common;
+﻿using PortKisel.Api.Infrastructures.Validator;
+using PortKisel.Common;
 using PortKisel.Common.Entity.InterfaceDB;
 using PortKisel.Context;
 using PortKisel.Repositories;
@@ -14,6 +15,7 @@ namespace PortKisel.Api.Infrastructures
             service.RegisterAutoMapperProfile<ApiAutoMapperProfile>();
             service.AddTransient<IDateTimeProvider, DateTimeProvider>();
             service.AddTransient<IDbWriterContext, DbWriterContext>();
+            service.AddTransient<IApiValidatorService, ApiValidatorService>();
 
             service.RegisterModule<ServiceModule>();
             service.RegisterModule<ContextModule>();

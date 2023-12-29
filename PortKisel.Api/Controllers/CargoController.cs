@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using PortKisel.Api.Attribute;
+using PortKisel.Api.Infrastructures.Validator;
 using PortKisel.Api.Models;
 using PortKisel.Api.ModelsRequest.Cargo;
 using PortKisel.Services.Contracts.Interface;
@@ -18,11 +19,13 @@ namespace PortKisel.Controllers
     {
         private readonly ICargoService cargoService;
         private readonly IMapper mapper;
+        private readonly IApiValidatorService validatorService;
 
-        public CargoController(ICargoService cargoService, IMapper mapper)
+        public CargoController(ICargoService cargoService, IMapper mapper, IApiValidatorService validatorService)
         {
             this.cargoService = cargoService;
             this.mapper = mapper;
+            this.validatorService = validatorService;
         }
 
         [HttpGet]
@@ -62,6 +65,8 @@ namespace PortKisel.Controllers
         [ApiNotAcceptable]
         public async Task<IActionResult> Create(CreateCargoRequest request, CancellationToken cancellationToken)
         {
+            await validatorService.ValidateAsync(request, cancellationToken);
+
             var cargoRequestModel = mapper.Map<CargoRequestModel>(request);
             var result = await cargoService.AddAsync(cargoRequestModel, cancellationToken);
             return Ok(mapper.Map<CargoResponse>(result));
@@ -77,6 +82,8 @@ namespace PortKisel.Controllers
         [ApiNotAcceptable]
         public async Task<IActionResult> Edit(EditCargoRequest request, CancellationToken cancellationToken)
         {
+            await validatorService.ValidateAsync(request, cancellationToken);
+
             var model = mapper.Map<CargoRequestModel>(request);
             var result = await cargoService.UpdateAsync(model, cancellationToken);
             return Ok(mapper.Map<CargoResponse>(result));

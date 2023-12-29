@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using PortKisel.Api.Attribute;
+using PortKisel.Api.Infrastructures.Validator;
 using PortKisel.Api.Models;
 using PortKisel.Api.ModelsRequest.Cargo;
 using PortKisel.Api.ModelsRequest.CompanyPer;
@@ -20,11 +21,13 @@ namespace PortKisel.Controllers
     {
         private readonly ICompanyPerService companyPerService;
         private readonly IMapper mapper;
+        private readonly IApiValidatorService validatorService;
 
-        public CompanyPerController(ICompanyPerService companyPerService, IMapper mapper)
+        public CompanyPerController(ICompanyPerService companyPerService, IMapper mapper, IApiValidatorService validatorService)
         {
             this.companyPerService = companyPerService;
             this.mapper = mapper;
+            this.validatorService = validatorService;
         }
 
         [HttpGet]
@@ -64,6 +67,8 @@ namespace PortKisel.Controllers
         [ApiNotAcceptable]
         public async Task<IActionResult> Create(CreateCompanyPerRequest request, CancellationToken cancellationToken)
         {
+            await validatorService.ValidateAsync(request, cancellationToken);
+
             var companyPerRequestModel = mapper.Map<CompanyPerRequestModel>(request);
             var result = await companyPerService.AddAsync(companyPerRequestModel, cancellationToken);
             return Ok(mapper.Map<CompanyPerResponse>(result));
@@ -79,6 +84,8 @@ namespace PortKisel.Controllers
         [ApiNotAcceptable]
         public async Task<IActionResult> Edit(EditCompanyPerRequest request, CancellationToken cancellationToken)
         {
+            await validatorService.ValidateAsync(request, cancellationToken); 
+
             var model = mapper.Map<CompanyPerRequestModel>(request);
             var result = await companyPerService.UpdateAsync(model, cancellationToken);
             return Ok(mapper.Map<CompanyPerResponse>(result));

@@ -27,8 +27,4 @@
     <ProjectReference Include="..\PortKisel.Services\PortKisel.Services.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Infrastructures\Validator\" />
-  </ItemGroup>
-
 </Project>

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using PortKisel.Api.Attribute;
+using PortKisel.Api.Infrastructures.Validator;
 using PortKisel.Api.Models;
 using PortKisel.Api.ModelsRequest.Vessel;
 using PortKisel.Services.Contracts.Interface;
@@ -19,11 +20,13 @@ namespace PortKisel.Controllers
     {
         private readonly IVesselService vesselService;
         private readonly IMapper mapper;
+        private readonly IApiValidatorService validatorService;
 
-        public VesselController(IVesselService vesselService, IMapper mapper)
+        public VesselController(IVesselService vesselService, IMapper mapper, IApiValidatorService validatorService)
         {
             this.vesselService = vesselService;
             this.mapper = mapper;
+            this.validatorService = validatorService;
         }
 
         [HttpGet]
@@ -63,6 +66,8 @@ namespace PortKisel.Controllers
         [ApiNotAcceptable]
         public async Task<IActionResult> Create(CreateVesselRequest request, CancellationToken cancellationToken)
         {
+            await validatorService.ValidateAsync(request, cancellationToken);
+
             var vesselRequestModel = mapper.Map<VesselRequestModel>(request);
             var result = await vesselService.AddAsync(vesselRequestModel, cancellationToken);
             return Ok(mapper.Map<VesselResponse>(result));
@@ -78,6 +83,8 @@ namespace PortKisel.Controllers
         [ApiNotAcceptable]
         public async Task<IActionResult> Edit(EditVesselRequest request, CancellationToken cancellationToken)
         {
+            await validatorService.ValidateAsync(request, cancellationToken);
+
             var model = mapper.Map<VesselRequestModel>(request);
             var result = await vesselService.UpdateAsync(model, cancellationToken);
             return Ok(mapper.Map<VesselResponse>(result));

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using PortKisel.Api.Attribute;
+using PortKisel.Api.Infrastructures.Validator;
 using PortKisel.Api.Models;
 using PortKisel.Api.ModelsRequest.Documenti;
 using PortKisel.Services.Contracts.Interface;
@@ -20,11 +21,13 @@ namespace PortKisel.Controllers
     {
         private readonly IDocumentiService documentiService;
         private readonly IMapper mapper;
+        private readonly IApiValidatorService validatorService;
 
-        public DocumentiController(IDocumentiService documentiService, IMapper mapper)
+        public DocumentiController(IDocumentiService documentiService, IMapper mapper, IApiValidatorService validatorService)
         {
             this.documentiService = documentiService;
             this.mapper = mapper;
+            this.validatorService = validatorService;
         }
 
         [HttpGet]
@@ -63,6 +66,8 @@ namespace PortKisel.Controllers
         [ApiNotAcceptable]
         public async Task<IActionResult> Create(CreateDocumentiRequest request, CancellationToken cancellationToken)
         {
+            await validatorService.ValidateAsync(request, cancellationToken);
+
             var documentiRequestModel = mapper.Map<DocumentiRequestModel>(request);
             var result = await documentiService.AddAsync(documentiRequestModel, cancellationToken);
             return Ok(mapper.Map<DocumentiResponse>(result));
@@ -78,6 +83,8 @@ namespace PortKisel.Controllers
         [ApiNotAcceptable]
         public async Task<IActionResult> Edit(EditDocumentiRequest request, CancellationToken cancellationToken)
         {
+            await validatorService.ValidateAsync(request, cancellationToken);
+
             var model = mapper.Map<DocumentiRequestModel>(request);
             var result = await documentiService.UpdateAsync(model, cancellationToken);
             return Ok(mapper.Map<DocumentiResponse>(result));

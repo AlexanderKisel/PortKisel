@@ -1,6 +1,7 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using PortKisel.Api.Attribute;
+using PortKisel.Api.Infrastructures.Validator;
 using PortKisel.Api.Models;
 using PortKisel.Api.ModelsRequest.Staff;
 using PortKisel.Services.Contracts.Interface;
@@ -19,11 +20,13 @@ namespace PortKisel.Controllers
     {
         private readonly IStaffService staffService;
         private readonly IMapper mapper;
+        private readonly IApiValidatorService validatorService;
 
-        public StaffController(IStaffService staffService, IMapper mapper)
+        public StaffController(IStaffService staffService, IMapper mapper, IApiValidatorService validatorService)
         {
             this.staffService = staffService;
             this.mapper = mapper;
+            this.validatorService = validatorService;
         }
 
         [HttpGet]
@@ -62,6 +65,8 @@ namespace PortKisel.Controllers
         [ApiNotAcceptable]
         public async Task<IActionResult> Create(CreateStaffRequest request, CancellationToken cancellationToken)
         {
+            await validatorService.ValidateAsync(request, cancellationToken);
+
             var staffRequestModel = mapper.Map<StaffRequestModel>(request);
             var result = await staffService.AddAsync(staffRequestModel, cancellationToken);
             return Ok(mapper.Map<StaffResponse>(result));
@@ -77,6 +82,8 @@ namespace PortKisel.Controllers
         [ApiNotAcceptable]
         public async Task<IActionResult> Edit(EditStaffRequest request, CancellationToken cancellationToken)
         {
+            await validatorService.ValidateAsync(request, cancellationToken);
+
             var model = mapper.Map<StaffRequestModel>(request);
             var result = await staffService.UpdateAsync(model, cancellationToken);
             return Ok(mapper.Map<StaffResponse>(result));
