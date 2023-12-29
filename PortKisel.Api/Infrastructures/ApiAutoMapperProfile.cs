@@ -6,6 +6,7 @@ using PortKisel.Api.Models.Enums;
 using PortKisel.Api.ModelsRequest.Cargo;
 using PortKisel.Api.ModelsRequest.CompanyPer;
 using PortKisel.Api.ModelsRequest.CompanyZakazchik;
+using PortKisel.Api.ModelsRequest.Documenti;
 using PortKisel.Api.ModelsRequest.Staff;
 using PortKisel.Api.ModelsRequest.Vessel;
 using PortKisel.Services.Contracts.Models;
@@ -47,9 +48,11 @@ namespace PortKisel.Api.Infrastructures
             CreateMap<EditStaffRequest, StaffRequestModel>(MemberList.Destination);
 
             CreateMap<DocumentiModel, DocumentiResponse>(MemberList.Destination)
-                .ForMember(x => x.CargoName, y => y.MapFrom(z => $"{z.Cargo.Name} {z.Cargo.Weight}"))
-                .ForMember(x => x.VesselName, y => y.MapFrom(z => $"{z.Vessel.Name} {z.Vessel.LoadCapacity}"))
-                .ForMember(x => x.StaffName, y => y.MapFrom(z => $"{z.Staff.FIO} {z.Staff.Post}"));
+                .ForMember(x => x.CargoName, y => y.MapFrom(z => $"{z.Cargo.Name}"))
+                .ForMember(x => x.VesselName, y => y.MapFrom(z => $"{z.Vessel.Name}"))
+                .ForMember(x => x.StaffName, y => y.MapFrom(z => $"{z.Staff.FIO}"));
+            CreateMap<CreateDocumentiRequest, DocumentiRequestModel>(MemberList.Destination);
+            CreateMap<EditDocumentiRequest, DocumentiRequestModel>(MemberList.Destination);
         }
     }
 }

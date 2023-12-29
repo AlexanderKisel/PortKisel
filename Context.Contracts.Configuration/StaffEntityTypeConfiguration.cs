@@ -17,7 +17,7 @@ namespace PortKisel.Context.Configuration
             builder
                 .HasMany(x => x.Documenti)
                 .WithOne(x => x.Staff)
-                .HasForeignKey(x => x.Responsible_cargoId);
+                .HasForeignKey(x => x.StaffId);
         }
     }
 }

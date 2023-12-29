@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace PortKisel.Context.Migrations
 {
     /// <inheritdoc />
-    public partial class first : Migration
+    public partial class second : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -126,7 +126,7 @@ namespace PortKisel.Context.Migrations
                     IssaedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CargoId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     VesselId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Responsible_cargoId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    StaffId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Responsible_cargo = table.Column<int>(type: "int", nullable: true),
                     CreatedAt = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
@@ -144,8 +144,8 @@ namespace PortKisel.Context.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Documenti_Staff_Responsible_cargoId",
-                        column: x => x.Responsible_cargoId,
+                        name: "FK_Documenti_Staff_StaffId",
+                        column: x => x.StaffId,
                         principalTable: "Staff",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -196,9 +196,9 @@ namespace PortKisel.Context.Migrations
                 column: "CargoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Documenti_Responsible_cargoId",
+                name: "IX_Documenti_StaffId",
                 table: "Documenti",
-                column: "Responsible_cargoId");
+                column: "StaffId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Documenti_VesselId",
