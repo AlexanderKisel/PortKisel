@@ -8,7 +8,7 @@ namespace PortKisel.Context.Configuration
     {
         public void Configure(EntityTypeBuilder<Documenti> builder)
         {
-            builder.ToTable("CompanyZakazchik");
+            builder.ToTable("Documenti");
             builder.HasIdAsKey();
             builder.PropertyAuditConfiguration();
             builder.Property(x => x.Number).IsRequired();
