@@ -24,8 +24,8 @@ namespace PortKisel.Api.Validators.Documenti
                 .WithMessage("Груз не должен быть пустым")
                 .MustAsync(async (id, cancellationToken) =>
                 {
-                    var cargo = await cargoReadRepository.GetByIdAsync(id, cancellationToken);
-                    return cargo != null;
+                    var cargo = await cargoReadRepository.AnyByIdAsync(id, cancellationToken);
+                    return cargo;
                 })
                 .WithMessage("Такого груза не существует");
             RuleFor(documenti => documenti.VesselId)
@@ -34,8 +34,8 @@ namespace PortKisel.Api.Validators.Documenti
                 .WithMessage("Судно не должно быть пустым")
                 .MustAsync(async (id, cancellationToken) =>
                 {
-                    var vessel = await vesselReadRepository.GetByIdAsync(id, cancellationToken);
-                    return vessel != null;
+                    var vessel = await vesselReadRepository.AnyByIdAsync(id, cancellationToken);
+                    return vessel;
                 })
                 .WithMessage("Такого судна не существует");
             RuleFor(documenti => documenti.StaffId)
@@ -44,8 +44,8 @@ namespace PortKisel.Api.Validators.Documenti
                 .WithMessage("Ответственный за груз не должен быть пустым")
                 .MustAsync(async (id, cancellationToken) =>
                 {
-                    var staff = await staffReadRepository.GetByIdAsync(id, cancellationToken);
-                    return staff != null;
+                    var staff = await staffReadRepository.AnyByIdAsync(id, cancellationToken);
+                    return staff;
                 })
                 .WithMessage("Такого ответственного за груз не существует");
         }

@@ -26,8 +26,8 @@ namespace PortKisel.Api.Validators.Vessel
                 .WithMessage("Компания перевозчик не должна быть пустым")
                 .MustAsync(async (id, cancellationToken) =>
                 {
-                    var companyPer = await companyPerReadRepository.GetByIdAsync(id, cancellationToken);
-                    return companyPer != null;
+                    var companyPer = await companyPerReadRepository.AnyByIdAsync(id, cancellationToken);
+                    return companyPer;
                 })
                 .WithMessage("Такого заказчика не существует");
         }

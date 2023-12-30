@@ -1,7 +1,5 @@
 ﻿using AutoMapper;
 using FluentAssertions;
-using PortKisel.Api.Infrastructures;
-using PortKisel.Common.Entity.InterfaceDB;
 using PortKisel.Context.Contracts.Models;
 using PortKisel.Context.Tests;
 using PortKisel.Repositories.Implementations;
@@ -9,12 +7,6 @@ using PortKisel.Services.AutoMappers;
 using PortKisel.Services.Contracts.Exceptions;
 using PortKisel.Services.Contracts.Interface;
 using PortKisel.Services.Implementations;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.PortableExecutable;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace PortKisel.Services.Tests.Tests
@@ -126,7 +118,7 @@ namespace PortKisel.Services.Tests.Tests
         /// Удаление несуществующего <see cref="Cargo"/>
         /// </summary>
         [Fact]
-        public async Task DeletingNonExistentCinemaReturnExсeption()
+        public async Task DeletingNonExistentReturnExсeption()
         {
             //Arrange
             var id = Guid.NewGuid();
@@ -143,7 +135,7 @@ namespace PortKisel.Services.Tests.Tests
         /// Удаление удаленного <see cref="Cargo"/>
         /// </summary>
         [Fact]
-        public async Task DeletingDeletedCinemaReturnExсeption()
+        public async Task DeletingDeletedReturnExсeption()
         {
             //Arrange
             var model = TestDataGenerator.Cargo(x => x.DeletedAt = DateTime.UtcNow);
@@ -180,7 +172,7 @@ namespace PortKisel.Services.Tests.Tests
         }
 
         /// <summary>
-        /// Добавление <see cref="Staff"/>
+        /// Добавление <see cref="Cargo"/>
         /// </summary>
         [Fact]
         public async Task AddShouldWork()

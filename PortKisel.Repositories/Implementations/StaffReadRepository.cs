@@ -36,5 +36,8 @@ namespace PortKisel.Repositories.Implementations
                 .ToDictionaryAsync(key => key.Id, cancellationToken);
         Task<bool> IStaffReadRepository.IsNotNullAsync(Guid id, CancellationToken cancellationToken)
             => reader.Read<Staff>().AnyAsync(x => x.Id == id && !x.DeletedAt.HasValue, cancellationToken);
+
+        Task<bool> IStaffReadRepository.AnyByIdAsync(Guid id, CancellationToken cancellationToken)
+        => reader.Read<Staff>().NotDeletedAt().AnyAsync(x => x.Id == id, cancellationToken);
     }
 }

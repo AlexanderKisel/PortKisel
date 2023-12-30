@@ -1,4 +1,6 @@
-﻿namespace PortKisel.Api.ModelsRequest.Vessel
+﻿using PortKisel.Api.Models;
+
+namespace PortKisel.Api.ModelsRequest.Vessel
 {
     public class CreateVesselRequest
     {

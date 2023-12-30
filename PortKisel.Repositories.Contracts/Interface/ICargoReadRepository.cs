@@ -26,5 +26,10 @@ namespace PortKisel.Repositories.Contracts.Interface
         /// Проверка есть <see cref="Cargo"/> в коллекции
         /// </summary>
         Task<bool> IsNotNullAsync(Guid id, CancellationToken cancellationToken);
+
+        /// <summary>
+        /// Проверить есть ли <see cref="Cargo"/> в коллеции
+        /// </summary>
+        Task<bool> AnyByIdAsync(Guid id, CancellationToken cancellationToken);
     }
 }

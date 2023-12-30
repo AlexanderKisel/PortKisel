@@ -26,5 +26,10 @@ namespace PortKisel.Repositories.Contracts.Interface
         /// Проверить есть ли <see cref="Staff"/> в коллеции
         /// </summary>
         Task<bool> IsNotNullAsync(Guid id, CancellationToken cancellationToken);
+
+        /// <summary>
+        /// Проверить есть ли <see cref="CompanyPer"/> в коллеции
+        /// </summary>
+        Task<bool> AnyByIdAsync(Guid id, CancellationToken cancellationToken);
     }
 }

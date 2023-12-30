@@ -16,6 +16,9 @@ namespace PortKisel.Repositories.Implementations
             this.reader = reader;
         }
 
+        Task<bool> ICompanyZakazchikReadRepository.AnyByIdAsync(Guid id, CancellationToken cancellationToken)
+            => reader.Read<CompanyZakazchik>().NotDeletedAt().AnyAsync(x => x.Id == id, cancellationToken);
+
         Task<List<CompanyZakazchik>> ICompanyZakazchikReadRepository.GetAllAsync(CancellationToken cancellationToken)
             => reader.Read<CompanyZakazchik>()
             .NotDeletedAt()
