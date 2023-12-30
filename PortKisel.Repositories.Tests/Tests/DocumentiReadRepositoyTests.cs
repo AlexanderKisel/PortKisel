@@ -2,12 +2,6 @@
 using PortKisel.Context.Tests;
 using PortKisel.Repositories.Contracts.Interface;
 using PortKisel.Repositories.Implementations;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.PortableExecutable;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace PortKisel.Repositories.Tests.Tests

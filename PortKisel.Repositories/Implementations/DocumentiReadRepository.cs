@@ -3,7 +3,6 @@ using PortKisel.Common.Entity.InterfaceDB;
 using PortKisel.Common.Entity.Repositories;
 using PortKisel.Context.Contracts.Models;
 using PortKisel.Repositories.Contracts.Interface;
-using System.Threading;
 
 namespace PortKisel.Repositories.Implementations
 {

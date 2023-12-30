@@ -1,12 +1,7 @@
 ﻿using PortKisel.Context.Contracts.Enums;
 using PortKisel.Context.Contracts.Models;
-using PortKisel.Services.Contracts.ModelsRequest;
 using PortKisel.Services.Contracts.Models.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using PortKisel.Services.Contracts.ModelsRequest;
 
 namespace PortKisel.Services.Tests
 {

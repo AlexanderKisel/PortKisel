@@ -1,7 +1,5 @@
 ﻿using AutoMapper;
 using FluentAssertions;
-using PortKisel.Api.Infrastructures;
-using PortKisel.Common.Entity.InterfaceDB;
 using PortKisel.Context.Contracts.Models;
 using PortKisel.Context.Tests;
 using PortKisel.Repositories.Implementations;
@@ -9,12 +7,6 @@ using PortKisel.Services.AutoMappers;
 using PortKisel.Services.Contracts.Exceptions;
 using PortKisel.Services.Contracts.Interface;
 using PortKisel.Services.Implementations;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.PortableExecutable;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace PortKisel.Services.Tests.Tests
