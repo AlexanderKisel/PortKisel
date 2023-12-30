@@ -88,3 +88,9 @@
         <<Abstract>>        
     }
 ```
+
+## Пример бизнес-процеса
+![image](https://github.com/AlexanderKisel/PortKisel/assets/106808032/4a468c53-6a72-407f-b6e0-1f38c1984b68)
+
+## Запрос для БД
+
