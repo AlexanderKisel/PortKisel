@@ -1,0 +1,232 @@
+﻿using AutoMapper;
+using FluentAssertions;
+using PortKisel.Context.Contracts.Models;
+using PortKisel.Context.Tests;
+using PortKisel.Repositories.Implementations;
+using PortKisel.Services.AutoMappers;
+using PortKisel.Services.Contracts.Exceptions;
+using PortKisel.Services.Contracts.Interface;
+using PortKisel.Services.Implementations;
+using Xunit;
+
+namespace PortKisel.Services.Tests.Tests
+{
+    public class CompanyPerServiceTests : PortContextInMemory
+    {
+        public readonly ICompanyPerService companyPerService;
+
+        /// <summary>
+        /// Инициализирует новый экземпляр <see cref="CompanyPerServiceTests"/>
+        /// </summary>
+        public CompanyPerServiceTests()
+        {
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new ServiceProfile());
+            });
+            companyPerService = new CompanyPerService(
+                new CompanyPerReadRepository(Reader),
+                config.CreateMapper(),
+                UnitOfWork,
+                new CompanyPerWriteRepository(WriterContext));
+        }
+
+        /// <summary>
+        /// Получение компаний перевозчика по id возвращает null
+        /// </summary>
+        [Fact]
+        public async Task GetByIdShouldReturnNull()
+        {
+            //Arrange
+            var id = Guid.NewGuid();
+
+            //Act
+            var result = await companyPerService.GetByIdAsync(id, CancellationToken);
+
+            //Assert
+            result.Should().BeNull();
+        }
+
+        /// <summary>
+        /// Получение компаний перевозчиков по id возвращает данные
+        /// </summary>
+        [Fact]
+        public async Task GetByIdShouldReturnValue()
+        {
+            //Arrange
+            var target = TestDataGenerator.CompanyPer();
+            await Context.CompanyPers.AddAsync(target);
+            await Context.SaveChangesAsync(CancellationToken);
+
+            //Act
+            var result = await companyPerService.GetByIdAsync(target.Id, CancellationToken);
+
+            //Assert
+            result.Should()
+                .NotBeNull()
+                .And.BeEquivalentTo(new
+                {
+                    target.Id,
+                    target.Name,
+                    target.Description
+                });
+        }
+
+        /// <summary>
+        /// Получение <see cref="IEnumerable{CompanyPer}"/> по ids возвращает пустую коллекцию
+        /// </summary>
+        [Fact]
+        public async Task GetAllShouldReturnEmpty()
+        {
+            // Act
+            var result = await companyPerService.GetAllAsync(CancellationToken);
+
+            // Assert
+            result.Should()
+                .NotBeNull()
+                .And.BeEmpty();
+        }
+
+        /// <summary>
+        /// Получение <see cref="IEnumerable{CompanyPer}"/> по ids возвращает данные
+        /// </summary>
+        [Fact]
+        public async Task GetAllShouldReturnValues()
+        {
+            //Arrange
+            var companyPer = TestDataGenerator.CompanyPer(x => { x.Id = Guid.NewGuid(); });
+
+            await Context.CompanyPers.AddRangeAsync(companyPer,
+                TestDataGenerator.CompanyPer(x => x.DeletedAt = DateTimeOffset.UtcNow));
+            await Context.SaveChangesAsync(CancellationToken);
+
+            // Act
+            var result = await companyPerService.GetAllAsync(CancellationToken);
+
+            // Assert
+            result.Should()
+                .NotBeNull()
+                .And.HaveCount(1)
+                .And.ContainSingle(x => x.Id == companyPer.Id);
+        }
+
+        /// <summary>
+        /// Удаление несуществующего <see cref="CompanyPer"/>
+        /// </summary>
+        [Fact]
+        public async Task DeletingNonExistentReturnExсeption()
+        {
+            //Arrange
+            var id = Guid.NewGuid();
+
+            // Act
+            Func<Task> result = () => companyPerService.DeleteAsync(id, CancellationToken);
+
+            // Assert
+            await result.Should().ThrowAsync<PortEntityNotFoundException<CompanyPer>>()
+               .WithMessage($"*{id}*");
+        }
+
+        /// <summary>
+        /// Удаление удаленного <see cref="CompanyPer"/>
+        /// </summary>
+        [Fact]
+        public async Task DeletingDeletedReturnExсeption()
+        {
+            //Arrange
+            var model = TestDataGenerator.CompanyPer(x => x.DeletedAt = DateTime.UtcNow);
+            await Context.CompanyPers.AddAsync(model);
+            await Context.SaveChangesAsync(CancellationToken);
+
+            // Act
+            Func<Task> result = () => companyPerService.DeleteAsync(model.Id, CancellationToken);
+
+            // Assert
+            await result.Should().ThrowAsync<PortInvalidOperationException>()
+               .WithMessage($"*{model.Id}*");
+        }
+
+        /// <summary>
+        /// Удаление <see cref="CompanyPer"/>
+        /// </summary>
+        [Fact]
+        public async Task DeleteShouldWork()
+        {
+            //Arrange
+            var model = TestDataGenerator.CompanyPer();
+            await Context.CompanyPers.AddAsync(model);
+            await UnitOfWork.SaveChangesAsync(CancellationToken);
+
+            //Act
+            Func<Task> act = () => companyPerService.DeleteAsync(model.Id, CancellationToken);
+
+            //Assert
+            await act.Should().NotThrowAsync();
+            var entity = Context.CompanyPers.Single(x => x.Id == model.Id);
+            entity.Should().NotBeNull();
+            entity.DeletedAt.Should().NotBeNull();
+        }
+
+        /// <summary>
+        /// Добавление <see cref="CompanyPer"/>
+        /// </summary>
+        [Fact]
+        public async Task AddShouldWork()
+        {
+            //Arrange
+            var model = TestDataGenerator.CompanyPerRequestModel();
+
+            //Act
+            var act = await companyPerService.AddAsync(model, CancellationToken);
+
+            // Assert
+            var entity = Context.CompanyPers.Single(x => x.Id == act.Id);
+            entity.Should().NotBeNull();
+            entity.DeletedAt.Should().BeNull();
+        }
+
+        /// <summary>
+        /// Изменение несуществующего <see cref="CompanyPer"/>
+        /// </summary>
+        [Fact]
+        public async Task EditShouldNotFoundException()
+        {
+            //Arrange
+            var model = TestDataGenerator.CompanyPerRequestModel();
+
+            //Act
+            Func<Task> act = () => companyPerService.UpdateAsync(model, CancellationToken);
+
+            // Assert
+            await act.Should().ThrowAsync<PortEntityNotFoundException<CompanyPer>>()
+                .WithMessage($"*{model.Id}*");
+        }
+
+        /// <summary>
+        /// Изменение <see cref="CompanyPer"/>
+        /// </summary>
+        [Fact]
+        public async Task EditShouldWork()
+        {
+            var companyPer = TestDataGenerator.CompanyPer();
+            await Context.CompanyPers.AddAsync(companyPer);
+            await UnitOfWork.SaveChangesAsync(CancellationToken);
+            var model = TestDataGenerator.CompanyPerRequestModel(x => x.Id = companyPer.Id);
+
+            //Act
+            Func<Task> act = () => companyPerService.UpdateAsync(model, CancellationToken);
+
+            // Assert
+            await act.Should().NotThrowAsync();
+            var entity = Context.CompanyPers.Single(x => x.Id == model.Id);
+            entity.Should().NotBeNull()
+                .And
+                .BeEquivalentTo(new
+                {
+                    model.Id,
+                    model.Name,
+                    model.Description
+                });
+        }
+    }
+}

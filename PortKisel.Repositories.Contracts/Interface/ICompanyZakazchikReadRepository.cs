@@ -22,5 +22,15 @@ namespace PortKisel.Repositories.Contracts.Interface
         /// Получить список всех компаний по идентификаторам
         /// </summary>
         Task<Dictionary<Guid, CompanyZakazchik>> GetByIdsAsync(IEnumerable<Guid> ids, CancellationToken cancellationToken);
+
+        /// <summary>
+        /// Проверить есть ли <see cref="CompanyZakazchik"/> в коллеции
+        /// </summary>
+        Task<bool> IsNotNullAsync(Guid id, CancellationToken cancellationToken);
+
+        /// <summary>
+        /// Проверить есть ли <see cref="CompanyZakazchik"/> в коллеции
+        /// </summary>
+        Task<bool> AnyByIdAsync(Guid id, CancellationToken cancellationToken);
     }
 }

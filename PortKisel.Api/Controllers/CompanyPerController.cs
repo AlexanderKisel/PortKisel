@@ -3,11 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using PortKisel.Api.Attribute;
 using PortKisel.Api.Infrastructures.Validator;
 using PortKisel.Api.Models;
-using PortKisel.Api.ModelsRequest.Cargo;
 using PortKisel.Api.ModelsRequest.CompanyPer;
 using PortKisel.Services.Contracts.Interface;
 using PortKisel.Services.Contracts.ModelsRequest;
-using PortKisel.Services.Implementations;
 
 namespace PortKisel.Controllers
 {

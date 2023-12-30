@@ -1,4 +1,4 @@
-﻿using PortKisel.Context.Contracts.Enums;
+﻿using PortKisel.Api.Models.Enums;
 
 namespace PortKisel.Api.ModelsRequest.Staff
 {
@@ -12,6 +12,6 @@ namespace PortKisel.Api.ModelsRequest.Staff
         /// <summary>
         /// Должность
         /// </summary>
-        public Posts Post { get; set; } = Posts.None;
+        public PostApi Post { get; set; }
     }
 }

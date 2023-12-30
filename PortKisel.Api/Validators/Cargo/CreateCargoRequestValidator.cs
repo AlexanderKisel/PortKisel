@@ -26,8 +26,8 @@ namespace PortKisel.Api.Validators.Cargo
                 .WithMessage("Компания заказчик не должна быть пустым")
                 .MustAsync(async (id, cancellationToken) =>
                 {
-                    var companyZakazchik = await companyZakazchikReadRepository.GetByIdAsync(id, cancellationToken);
-                    return companyZakazchik != null;
+                    var companyZakazchik = await companyZakazchikReadRepository.AnyByIdAsync(id, cancellationToken);
+                    return companyZakazchik;
                 })
                 .WithMessage("Такого заказчика не существует");
         }

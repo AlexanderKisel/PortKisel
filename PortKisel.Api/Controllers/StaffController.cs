@@ -6,7 +6,6 @@ using PortKisel.Api.Models;
 using PortKisel.Api.ModelsRequest.Staff;
 using PortKisel.Services.Contracts.Interface;
 using PortKisel.Services.Contracts.ModelsRequest;
-using PortKisel.Services.Implementations;
 
 namespace PortKisel.Controllers
 {

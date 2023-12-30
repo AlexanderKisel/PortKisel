@@ -20,6 +20,6 @@ namespace PortKisel.Services.Contracts.ModelsRequest
         /// <summary>
         /// Должность
         /// </summary>
-        public PostModels Post { get; set; } = PostModels.None;
+        public PostModels Post { get; set; }
     }
 }

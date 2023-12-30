@@ -73,7 +73,7 @@ namespace PortKisel.Services.Implementations
             var targetSupplier = await companyZakazchikReadRepository.GetByIdAsync(id, cancellationToken);
             if (targetSupplier == null)
             {
-                throw new PortEntityNotFoundException<CompanyPer>(id);
+                throw new PortEntityNotFoundException<CompanyZakazchik>(id);
             }
             if (targetSupplier.DeletedAt.HasValue)
             {

@@ -37,5 +37,11 @@ namespace PortKisel.Repositories.Implementations
                 .ThenBy(x => x.Description)
                 .ThenBy(x => x.Weight)
                 .ToDictionaryAsync(key => key.Id, cancellationToken);
+
+        Task<bool> ICargoReadRepository.IsNotNullAsync(Guid id, CancellationToken cancellationToken)
+            => reader.Read<Cargo>().AnyAsync(x => x.Id == id && !x.DeletedAt.HasValue, cancellationToken);
+
+        Task<bool> ICargoReadRepository.AnyByIdAsync(Guid id, CancellationToken cancellationToken)
+                => reader.Read<Cargo>().NotDeletedAt().AnyAsync(x => x.Id == id, cancellationToken);
     }
 }
