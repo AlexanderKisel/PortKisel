@@ -11,7 +11,7 @@ namespace PortKisel.Context.Tests
         private readonly CancellationTokenSource cancellationTokenSource;
 
         /// <summary>
-        /// Контекст <see cref="DealerShipContext"/>
+        /// Контекст <see cref="PortContext"/>
         /// </summary>
         protected PortContext Context { get; }
 

@@ -1,12 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FluentAssertions;
+using FluentAssertions.Extensions;
+using Xunit;
 
 namespace PortKisel.Api.Tests
 {
-    internal class TestMapper
+    public class TestMapper
     {
+        [Fact]
+        public void TestValidate()
+        {
+            var item = 1.March(2022).At(20, 30).AsLocal();
+            var item2 = 2.March(2022).At(20, 30).AsLocal();
+            item.Should().NotBe(item2);
+        }
     }
 }

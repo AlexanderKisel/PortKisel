@@ -34,5 +34,7 @@ namespace PortKisel.Repositories.Implementations
             .OrderBy(x => x.Name)
             .ThenBy(x => x.Description)
             .ToDictionaryAsync(key => key.Id, cancellationToken);
+        Task<bool> ICompanyPerReadRepository.IsNotNullAsync(Guid id, CancellationToken cancellationToken)
+            => reader.Read<CompanyPer>().AnyAsync(x => x.Id == id && !x.DeletedAt.HasValue, cancellationToken);
     }
 }

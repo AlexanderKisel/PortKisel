@@ -21,5 +21,10 @@ namespace PortKisel.Repositories.Contracts.Interface
         /// Получить <see cref="Cargo"/>
         /// </summary>
         Task<Dictionary<Guid, Cargo>> GetByIdsAsync(IEnumerable<Guid> ids, CancellationToken cancellationToken);
+
+        /// <summary>
+        /// Проверка есть <see cref="Cargo"/> в коллекции
+        /// </summary>
+        Task<bool> IsNotNullAsync(Guid id, CancellationToken cancellationToken);
     }
 }

@@ -10,16 +10,21 @@ namespace PortKisel.Repositories.Contracts.Interface
         /// <summary>
         /// Получить список всех сотрудников <see cref="Documenti"/>
         /// </summary>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
         Task<List<Documenti>> GetAllAsync(CancellationToken cancellationToken);
 
         /// <summary>
         /// Получить <see cref="Documenti"/> по id
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
         Task<Documenti?> GetByIdAsync(Guid id, CancellationToken cancellationToken);
+
+        /// <summary>
+        /// Получить список <see cref="Documenti"/> по идентификаторам
+        /// </summary>
+        Task<Dictionary<Guid, Documenti>> GetByIdsAsync(IEnumerable<Guid> ids, CancellationToken cancellation);
+
+        /// <summary>
+        /// Проверить есть ли <see cref="Documenti"/> в коллеции
+        /// </summary>
+        Task<bool> IsNotNullAsync(Guid id, CancellationToken cancellationToken);
     }
 }

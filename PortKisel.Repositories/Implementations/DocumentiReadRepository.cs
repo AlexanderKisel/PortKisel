@@ -3,6 +3,7 @@ using PortKisel.Common.Entity.InterfaceDB;
 using PortKisel.Common.Entity.Repositories;
 using PortKisel.Context.Contracts.Models;
 using PortKisel.Repositories.Contracts.Interface;
+using System.Threading;
 
 namespace PortKisel.Repositories.Implementations
 {
@@ -26,5 +27,16 @@ namespace PortKisel.Repositories.Implementations
             => reader.Read<Documenti>()
             .ById(id)
             .FirstOrDefaultAsync(cancellationToken);
+
+        Task<Dictionary<Guid, Documenti>> IDocumentiReadRepository.GetByIdsAsync(IEnumerable<Guid> ids, CancellationToken cancellationToken)
+            => reader.Read<Documenti>()
+                .NotDeletedAt()
+                .ByIds(ids)
+                .OrderBy(x => x.Number)
+                .ThenBy(x => x.IssaedAt)
+                .ToDictionaryAsync(key => key.Id, cancellationToken);
+
+        Task<bool> IDocumentiReadRepository.IsNotNullAsync(Guid id, CancellationToken cancellationToken)
+            => reader.Read<Documenti>().AnyAsync(x => x.Id == id && !x.DeletedAt.HasValue, cancellationToken);
     }
 }
