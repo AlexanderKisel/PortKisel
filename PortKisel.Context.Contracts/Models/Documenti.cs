@@ -48,10 +48,5 @@ namespace PortKisel.Context.Contracts.Models
         /// Работник
         /// </summary>
         public Staff? Staff { get; set; }
-
-        /// <summary>
-        /// Ответственный за груз
-        /// </summary>
-        public Posts? Responsible_cargo { get; set; }
     }
 }
