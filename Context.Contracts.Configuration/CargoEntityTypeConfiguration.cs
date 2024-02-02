@@ -27,7 +27,6 @@ namespace PortKisel.Context.Configuration
                 .HasDatabaseName($"IX_{nameof(Cargo)}_{nameof(Cargo.Name)}");
 
             builder.HasIndex(x => x.Weight)
-                .IsUnique()
                 .HasFilter($"{nameof(Cargo.DeletedAt)} is null")
                 .HasDatabaseName($"IX_{nameof(Cargo)}_{nameof(Cargo.Weight)}");
         }

@@ -1,11 +1,20 @@
-﻿using FluentAssertions;
+﻿using AutoMapper;
+using FluentAssertions;
 using FluentAssertions.Extensions;
+using PortKisel.Api.Infrastructures;
 using Xunit;
 
 namespace PortKisel.Api.Tests
 {
     public class TestMapper
     {
+        [Fact]
+        public void Test()
+        {
+            var configuration = new MapperConfiguration(cfg => cfg.AddProfile<ApiAutoMapperProfile>());
+            configuration.AssertConfigurationIsValid();
+        }
+
         [Fact]
         public void TestValidate()
         {

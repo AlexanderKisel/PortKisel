@@ -10,13 +10,14 @@ namespace PortKisel.Api.Tests
 {
     static public class TestDataGenerators
     {
+        private static Random rnd = new Random();
         static public CreateCargoRequest CreateCargoRequest(Action<CreateCargoRequest>? action = null)
         {
             var item = new CreateCargoRequest
             {
                 Name = $"Name{Guid.NewGuid()}",
                 Description = $"Description{Guid.NewGuid()}",
-                Weight = "10000",
+                Weight = rnd.Next(100, 100000).ToString(),
                 CompanyZakazchikId = Guid.NewGuid()
             };
 

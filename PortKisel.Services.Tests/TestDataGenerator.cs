@@ -7,6 +7,7 @@ namespace PortKisel.Services.Tests
 {
     static public class TestDataGenerator
     {
+        private static Random rnd = new Random();   
         static public Cargo Cargo(Action<Cargo>? action = null)
         {
             var item = new Cargo
@@ -14,7 +15,7 @@ namespace PortKisel.Services.Tests
                 Id = Guid.NewGuid(),
                 Name = $"Name{Guid.NewGuid()}",
                 Description = $"Description{Guid.NewGuid()}",
-                Weight = "10000",
+                Weight = rnd.Next(100, 100000).ToString(),
                 CreatedAt = DateTimeOffset.UtcNow,
                 CreatedBy = $"CreatedBy{Guid.NewGuid()}",
                 UpdatedAt = DateTimeOffset.UtcNow,
