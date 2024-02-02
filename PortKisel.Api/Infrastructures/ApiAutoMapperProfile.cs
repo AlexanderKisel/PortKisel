@@ -57,8 +57,8 @@ namespace PortKisel.Api.Infrastructures
                 .ForMember(x => x.VesselName, y => y.MapFrom(z => $"{z.Vessel.Name}"))
                 .ForMember(x => x.StaffName, y => y.MapFrom(z => $"{z.Staff.FIO}"));
             CreateMap<CreateDocumentiRequest, DocumentiRequestModel>(MemberList.Destination)
-                .ForMember(x => x.Id, opt => opt.Ignore());
-            CreateMap<EditDocumentiRequest, DocumentiRequestModel>(MemberList.Destination);
+                .ForMember(x => x.Id, opt => opt.Ignore()).ReverseMap();
+            CreateMap<EditDocumentiRequest, DocumentiRequestModel>(MemberList.Destination).ReverseMap();
         }
     }
 }
