@@ -26,13 +26,13 @@ namespace PortKisel.Api.Infrastructures
 
             CreateMap<CompanyPerModel, CompanyPerResponse>(MemberList.Destination);
             CreateMap<CreateCompanyPerRequest, CompanyPerRequestModel>(MemberList.Destination)
-                .ForMember(x => x.Id, opt => opt.Ignore());
-            CreateMap<EditCompanyPerRequest, CompanyPerRequestModel>(MemberList.Destination).ReverseMap();
+                .ForMember(x => x.Id, opt => opt.Ignore()).ReverseMap();
+            CreateMap<EditCompanyPerRequest, CompanyPerRequestModel>(MemberList.Destination).ReverseMap().ReverseMap();
 
             CreateMap<CompanyZakazchikModel, CompanyZakazchikResponse>(MemberList.Destination);
             CreateMap<CreateCompanyZakazhikRequest, CompanyZakazchikRequestModel>(MemberList.Destination)
-                .ForMember(x => x.Id, opt => opt.Ignore());
-            CreateMap<EditCompanyZakazhikRequest, CompanyZakazchikRequestModel>(MemberList.Destination);
+                .ForMember(x => x.Id, opt => opt.Ignore()).ReverseMap();
+            CreateMap<EditCompanyZakazhikRequest, CompanyZakazchikRequestModel>(MemberList.Destination).ReverseMap();
 
             CreateMap<CargoModel, CargoResponse>(MemberList.Destination)
                 .ForMember(x => x.CompanyZakazchikName, y => y.MapFrom(z => $"{z.CompanyZakazchik.Name}"));
@@ -43,14 +43,14 @@ namespace PortKisel.Api.Infrastructures
             CreateMap<VesselModel, VesselResponse>(MemberList.Destination)
                 .ForMember(x => x.CompanyPerName, y => y.MapFrom(z => $"{z.CompanyPer.Name}"));
             CreateMap<CreateVesselRequest, VesselRequestModel>(MemberList.Destination)
-                .ForMember(x => x.Id, opt => opt.Ignore());
-            CreateMap<EditVesselRequest, VesselRequestModel>(MemberList.Destination);
+                .ForMember(x => x.Id, opt => opt.Ignore()).ReverseMap();
+            CreateMap<EditVesselRequest, VesselRequestModel>(MemberList.Destination).ReverseMap();
 
             CreateMap<StaffModel, StaffResponse>(MemberList.Destination)
-                .ForMember(x => x.Posts, y => y.MapFrom(z => z.Post.GetDisplayName()));
+                .ForMember(x => x.Post, y => y.MapFrom(z => z.Post.GetDisplayName()));
             CreateMap<CreateStaffRequest, StaffRequestModel>(MemberList.Destination)
-                .ForMember(x => x.Id, opt => opt.Ignore());
-            CreateMap<EditStaffRequest, StaffRequestModel>(MemberList.Destination);
+                .ForMember(x => x.Id, opt => opt.Ignore()).ReverseMap();
+            CreateMap<EditStaffRequest, StaffRequestModel>(MemberList.Destination).ReverseMap();
 
             CreateMap<DocumentiModel, DocumentiResponse>(MemberList.Destination)
                 .ForMember(x => x.CargoName, y => y.MapFrom(z => $"{z.Cargo.Name}"))

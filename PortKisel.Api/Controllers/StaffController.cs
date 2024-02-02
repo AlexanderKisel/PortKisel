@@ -5,7 +5,9 @@ using PortKisel.Api.Infrastructures.Validator;
 using PortKisel.Api.Models;
 using PortKisel.Api.ModelsRequest.Staff;
 using PortKisel.Services.Contracts.Interface;
+using PortKisel.Services.Contracts.Models;
 using PortKisel.Services.Contracts.ModelsRequest;
+using System.ComponentModel.DataAnnotations;
 
 namespace PortKisel.Controllers
 {
@@ -44,7 +46,7 @@ namespace PortKisel.Controllers
         [ApiConflict]
         [ApiNotFound]
         [ApiNotAcceptable]
-        public async Task<IActionResult> GetById(Guid id, CancellationToken cancellationToken)
+        public async Task<IActionResult> GetById([Required]Guid id, CancellationToken cancellationToken)
         {
             var result = await staffService.GetByIdAsync(id, cancellationToken);
             if (result == null)

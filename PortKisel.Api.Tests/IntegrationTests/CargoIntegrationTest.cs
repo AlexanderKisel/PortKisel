@@ -1,14 +1,13 @@
-﻿using PortKisel.Api.ModelsRequest.Cargo;
-using PortKisel.Api.Tests.Infrastructure;
-using Xunit;
-using PortKisel.Services.Tests;
-using Newtonsoft.Json;
-using System.Text;
-using PortKisel.Api.Models;
+﻿using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
-using FluentAssertions;
+using Newtonsoft.Json;
+using PortKisel.Api.Models;
+using PortKisel.Api.ModelsRequest.Cargo;
+using PortKisel.Api.Tests.Infrastructure;
 using PortKisel.Context.Contracts.Models;
-using Azure;
+using PortKisel.Services.Tests;
+using System.Text;
+using Xunit;
 
 namespace PortKisel.Api.Tests.IntegrationTests
 {
@@ -20,7 +19,7 @@ namespace PortKisel.Api.Tests.IntegrationTests
             companyZakazchik = TestDataGenerator.CompanyZakazchik();
 
             context.CompanyZakazchiks.Add(companyZakazchik);
-            unitOfWork.SaveChangesAsync();
+            unitOfWork.SaveChangesAsync().Wait();
         }
 
         [Fact]

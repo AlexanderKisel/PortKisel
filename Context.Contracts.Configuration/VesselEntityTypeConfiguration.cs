@@ -23,13 +23,12 @@ namespace PortKisel.Context.Configuration
 
             builder.HasIndex(x => x.Name)
                 .IsUnique()
-                .HasFilter($"{nameof(Cargo.DeletedAt)} is null")
-                .HasDatabaseName($"IX_{nameof(Cargo)}_{nameof(Cargo.Name)}");
+                .HasFilter($"{nameof(Vessel.DeletedAt)} is null")
+                .HasDatabaseName($"IX_{nameof(Vessel)}_{nameof(Vessel.Name)}");
 
             builder.HasIndex(x => x.LoadCapacity)
-                .IsUnique()
-                .HasFilter($"{nameof(Cargo.DeletedAt)} is null")
-                .HasDatabaseName($"IX_{nameof(Cargo)}_{nameof(Cargo.Weight)}");
+                .HasFilter($"{nameof(Vessel.DeletedAt)} is null")
+                .HasDatabaseName($"IX_{nameof(Vessel)}_{nameof(Vessel.LoadCapacity)}");
         }
     }
 }

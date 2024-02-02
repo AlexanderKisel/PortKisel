@@ -69,7 +69,7 @@ namespace PortKisel.Controllers
 
             var companyZakazchikRequestModel = mapper.Map<CompanyZakazchikRequestModel>(request);
             var result = await companyZakazchikService.AddAsync(companyZakazchikRequestModel, cancellationToken);
-            return Ok(mapper.Map<CompanyPerResponse>(result));
+            return Ok(mapper.Map<CompanyZakazchikResponse>(result));
         }
 
         /// <summary>

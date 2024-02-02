@@ -102,7 +102,7 @@ namespace PortKisel.Services.Tests
                 Id = Guid.NewGuid(),
                 Name = $"Name{Guid.NewGuid()}",
                 Description = $"Description{Guid.NewGuid()}",
-                LoadCapacity = "12000",
+                LoadCapacity = rnd.Next(100, 100000).ToString(),
                 CreatedAt = DateTimeOffset.UtcNow,
                 CreatedBy = $"CreatedBy{Guid.NewGuid()}",
                 UpdatedAt = DateTimeOffset.UtcNow,
@@ -120,7 +120,7 @@ namespace PortKisel.Services.Tests
                 Id = Guid.NewGuid(),
                 Name = $"Name{Guid.NewGuid()}",
                 Description = $"Description{Guid.NewGuid()}",
-                Weight = "10000"
+                Weight = rnd.Next(100, 100000).ToString()
             };
 
             action?.Invoke(item);
@@ -171,8 +171,9 @@ namespace PortKisel.Services.Tests
         {
             var item = new StaffRequestModel
             {
+                Id = Guid.NewGuid(),
                 FIO = $"Name{Guid.NewGuid()}",
-                Post = PostModels.Responsible_cargo
+                Post = PostModels.None
             };
 
             action?.Invoke(item);
@@ -186,7 +187,7 @@ namespace PortKisel.Services.Tests
                 Id = Guid.NewGuid(),
                 Name = $"Name{Guid.NewGuid()}",
                 Description = $"Description{Guid.NewGuid()}",
-                LoadCapacity = "12000"
+                LoadCapacity = rnd.Next(100, 100000).ToString()
             };
 
             action?.Invoke(item);

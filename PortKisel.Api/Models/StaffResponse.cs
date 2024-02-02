@@ -1,4 +1,7 @@
-﻿namespace PortKisel.Api.Models
+﻿using PortKisel.Api.Models.Enums;
+using PortKisel.Services.Contracts.Models.Enums;
+
+namespace PortKisel.Api.Models
 {
     /// <summary>
     /// Модель ответа сущности сотрудники
@@ -18,6 +21,6 @@
         /// <summary>
         /// Должность
         /// </summary>
-        public string Posts { get; set; } = string.Empty;
+        public PostApi Post { get; set; }
     }
 }

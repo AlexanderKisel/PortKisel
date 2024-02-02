@@ -83,7 +83,7 @@ namespace PortKisel.Api.Tests
             {
                 Name = $"Name{Guid.NewGuid()}",
                 Description = $"Description{Guid.NewGuid()}",
-                LoadCapacity = "12000",
+                LoadCapacity = rnd.Next(100, 100000).ToString(),
                 CompanyPerId = Guid.NewGuid()
             };
 
